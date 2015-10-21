@@ -99,5 +99,7 @@ class Game
 
 end
 
-game = Game.new
-game.start_game
+
+## Paused to run tests
+#game = Game.new
+#game.start_game
