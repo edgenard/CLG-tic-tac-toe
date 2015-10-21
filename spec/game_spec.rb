@@ -7,4 +7,5 @@ RSpec.describe "Game" do
 
     expect(game).to be_kind_of(Game)
   end
+
 end
