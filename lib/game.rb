@@ -63,7 +63,7 @@ class Game
     # Else fill in the space with human marker
     # If that ends the game return that as the best move.
     available_spaces.each do |as|
-      dup_board[as.to_i] = @com
+      dup_board[as.to_i] = next_player
       if game_is_over(dup_board)
         best_move = as.to_i
         return best_move
@@ -125,6 +125,6 @@ class Game
 end
 
 
-## Paused to run tests
-# game = Game.new
-# game.start_game
+if __FILE__ == $0
+  Game.new.start_game
+end
