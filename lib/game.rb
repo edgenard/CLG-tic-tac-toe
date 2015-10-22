@@ -79,12 +79,10 @@ class Game
         end
       end
     end
-    if best_move
-      return best_move
-    else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
-    end
+
+    n = rand(0..available_spaces.count)
+    return available_spaces[n].to_i
+
   end
 
   def game_is_over(board)
