@@ -97,8 +97,8 @@ class Game
     check_diagonals(board)
   end
 
-  def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
+  def tie(board)
+    board.all? { |spot| spot == "X" || spot == "O" }
   end
 
 
