@@ -66,13 +66,11 @@ class Game
       dup_board[as.to_i] = @com
       if game_is_over(dup_board)
         best_move = as.to_i
-        dup_board[as.to_i] = as
         return best_move
       else
         dup_board[as.to_i] = @hum
         if game_is_over(dup_board)
           best_move = as.to_i
-          dup_board[as.to_i] = as
           return best_move
         else
           dup_board[as.to_i] = as
