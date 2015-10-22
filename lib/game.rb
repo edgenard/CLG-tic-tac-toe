@@ -52,14 +52,10 @@ class Game
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = []
+    dup_board = board.dup
+    available_spaces = get_available_spaces(dup_board)
     best_move = nil
-    #Fill in available spaces array with any empty space
-    board.each do |s|
-      if s != "X" && s != "O"
-        available_spaces << s
-      end
-    end
+
 
     # Go through the available spaces
     # Fill in each space with the Computer's marker
@@ -67,19 +63,19 @@ class Game
     # Else fill in the space with human marker
     # If that ends the game return that as the best move.
     available_spaces.each do |as|
-      board[as.to_i] = @com
-      if game_is_over(board)
+      dup_board[as.to_i] = @com
+      if game_is_over(dup_board)
         best_move = as.to_i
-        board[as.to_i] = as
+        dup_board[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = @hum
-        if game_is_over(board)
+        dup_board[as.to_i] = @hum
+        if game_is_over(dup_board)
           best_move = as.to_i
-          board[as.to_i] = as
+          dup_board[as.to_i] = as
           return best_move
         else
-          board[as.to_i] = as
+          dup_board[as.to_i] = as
         end
       end
     end
@@ -119,6 +115,15 @@ class Game
   def check_diagonals(board)
     [board[0], board[4], board[8]].uniq.length == 1 ||
     [board[2], board[4], board[6]].uniq.length == 1
+  end
+
+  def get_available_spaces(board)
+    spaces  = []
+    board.each do |spot|
+      if spot != "X" && spot != "O"
+        spaces << spot
+      end
+    end
   end
 
 end
