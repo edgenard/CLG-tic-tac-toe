@@ -92,19 +92,33 @@ class Game
   end
 
   def game_is_over(b)
-
-    [b[0], b[1], b[2]].uniq.length == 1 ||
-    [b[3], b[4], b[5]].uniq.length == 1 ||
-    [b[6], b[7], b[8]].uniq.length == 1 ||
-    [b[0], b[3], b[6]].uniq.length == 1 ||
-    [b[1], b[4], b[7]].uniq.length == 1 ||
-    [b[2], b[5], b[8]].uniq.length == 1 ||
-    [b[0], b[4], b[8]].uniq.length == 1 ||
-    [b[2], b[4], b[6]].uniq.length == 1
+    check_rows(b) ||
+    check_columns(b) ||
+    check_diagonals(b)
   end
 
   def tie(b)
     b.all? { |s| s == "X" || s == "O" }
+  end
+
+
+  private
+
+  def check_rows(b)
+    [b[0], b[1], b[2]].uniq.length == 1 ||
+    [b[3], b[4], b[5]].uniq.length == 1 ||
+    [b[6], b[7], b[8]].uniq.length == 1
+  end
+
+  def check_columns(b)
+    [b[0], b[3], b[6]].uniq.length == 1 ||
+    [b[1], b[4], b[7]].uniq.length == 1 ||
+    [b[2], b[5], b[8]].uniq.length == 1
+  end
+
+  def check_diagonals(b)
+    [b[0], b[4], b[8]].uniq.length == 1 ||
+    [b[2], b[4], b[6]].uniq.length == 1
   end
 
 end
