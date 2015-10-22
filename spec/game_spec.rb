@@ -153,4 +153,31 @@ RSpec.describe "Game" do
     expect(result).to be true
   end
 
+  it "is a tie when all the spaces are filled" do
+    game = Game.new
+    board = ["O", "O", "X", "X", "X", "O", "O","O", "X"]
+
+    result = game.tie(board)
+
+    expect(result).to be true
+  end
+
+  it "is not a tie when X has won" do
+    game = Game.new
+    board = ["X", "O", "X", "O", "X", "O", "X","7", "O"]
+
+    result = game.tie(board)
+
+    expect(result).to be false
+  end
+
+  it "is not a tie when O has won" do
+    game = Game.new
+    board=["O", "X", "O", "X", "O", "X", "O", "7", "X"]
+
+    result = game.tie(board)
+
+    expect(result).to be false
+  end
+
 end
