@@ -180,4 +180,34 @@ RSpec.describe "Game" do
     expect(result).to be false
   end
 
+  it "blocks human from winning" do
+    game = Game.new
+    board = ["X", "1", "2", "O", "O", "5", "6", "7", "8"]
+
+    result = game.get_best_move(board, "X")
+
+    expect(result).to be 5
+  end
+
+  it "wins when it can" do
+    game = Game.new
+    board = ["O", "O", "X", "3", "X", "O", "6", "7", "8"]
+
+    result = game.get_best_move(board, "X")
+
+    expect(result).to be 6
+  end
+
+  it "picks any available space when it can't win or lose" do
+    game = Game.new
+    board = ["0", "1", "2", "3", "O", "5", "6", "7", "8"]
+
+    best_move = game.get_best_move(board, "X")
+    result = [0, 1, 2, 3, 5, 6, 7, 8].include? best_move
+
+    expect(result).to be true
+  end
+
+
+
 end

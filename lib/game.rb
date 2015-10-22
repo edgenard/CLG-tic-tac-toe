@@ -51,11 +51,18 @@ class Game
   def get_best_move(board, next_player, depth = 0, best_score = {})
     available_spaces = []
     best_move = nil
+    #Fill in available spaces array with any empty space
     board.each do |s|
       if s != "X" && s != "O"
         available_spaces << s
       end
     end
+
+    # Go through the available spaces
+    # Fill in each space with the Computer's marker
+    # If that ends the game return that as the best_move
+    # Else fill in the space with human marker
+    # If that ends the game return that as the best move.
     available_spaces.each do |as|
       board[as.to_i] = @com
       if game_is_over(board)
@@ -101,5 +108,5 @@ end
 
 
 ## Paused to run tests
-#game = Game.new
-#game.start_game
+# game = Game.new
+# game.start_game
