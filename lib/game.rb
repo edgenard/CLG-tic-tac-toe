@@ -114,12 +114,7 @@ class Game
   end
 
   def get_available_spaces(board)
-    spaces  = []
-    board.each do |spot|
-      if spot != "X" && spot != "O"
-        spaces << spot
-      end
-    end
+    board.select {|spot| spot != "X" && spot != "O"}
   end
 
 end
