@@ -3,12 +3,12 @@ require 'game'
 
 RSpec.describe "Game" do
 
-  it "#state returns the state of the game as an array" do
+  it "creates a new board when initialized" do
     game = Game.new
 
-    result = game.state
+    result = game.board
 
-    expect(result).to match(['0','1', '2', '3', '4', '5', '6', '7', '8'])
+    expect(result).to be_kind_of(Board)
   end
 
 
@@ -18,7 +18,7 @@ RSpec.describe "Game" do
     board = game.board
     board[0], board[3], board[4] = 'X', 'O', 'O'
 
-    result = game.get_best_move(board.state, "X")
+    result = game.get_best_move(board, "X")
 
     expect(result).to be 5
   end
@@ -30,7 +30,7 @@ RSpec.describe "Game" do
     board[4], board[5] = 'X', 'O'
 
 
-    result = game.get_best_move(board.state, "X")
+    result = game.get_best_move(board, "X")
 
     expect(result).to be 6
   end
@@ -40,7 +40,7 @@ RSpec.describe "Game" do
     board = game.board
     board[4] = 'O'
 
-    best_move = game.get_best_move(board.state, "X")
+    best_move = game.get_best_move(board, "X")
     result = [0, 1, 2, 3, 5, 6, 7, 8].include? best_move
 
     expect(result).to be true

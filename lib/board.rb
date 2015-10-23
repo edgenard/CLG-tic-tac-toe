@@ -25,6 +25,14 @@ class Board
     !game_over? && state.all? { |spot| spot == "X" || spot == "O" }
   end
 
+  def available_spaces
+    state.select {|space| space != 'X' && space != 'O'}
+  end
+
+  def valid_spot?(spot)
+    spot.match(/\d/) && available_spaces.include?(spot)
+  end
+
   private
 
   def check_rows?

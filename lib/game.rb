@@ -17,11 +17,6 @@ class Game
     @hum = "O"
   end
 
-  def state
-    board.state
-  end
-
-
   def start_game
     puts MESSAGES[:welcome]
     puts board.display
@@ -39,12 +34,11 @@ class Game
     puts MESSAGES[:game_over]
   end
 
-
   def get_human_spot
     spot = nil
     until spot
       spot = gets.chomp
-      if valid_spot?(spot)
+      if board.valid_spot?(spot)
         board[spot.to_i] = @hum
       else
         spot = nil
@@ -53,51 +47,40 @@ class Game
     end
   end
 
-
   def eval_board
     if board[4] == "4"
       board[4] = @com
     else
-      spot = get_best_move(state, @com)
+      spot = get_best_move(board, @com)
       board[spot] = @com
     end
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    dup_board = board.dup
-    available_spaces = get_available_spaces(dup_board)
+    available_spaces = board.available_spaces
     return available_spaces.first.to_i if available_spaces.length < 2
 
-
     available_spaces.each do |as|
-      dup_board[as.to_i] = next_player
-      if game_is_over(dup_board)
+      board[as.to_i] = next_player
+      if board.game_over?
+        board[as.to_i] = as
         return  as.to_i
       else
-        dup_board[as.to_i] = @hum
-        if game_is_over(dup_board)
+        board[as.to_i] = @hum
+        if board.game_over?
+          board[as.to_i] = as
           return as.to_i
         else
-          dup_board[as.to_i] = as
+          board[as.to_i] = as
         end
       end
     end
 
     n = rand(0..available_spaces.count)
     return available_spaces[n].to_i
-
   end
 
-
-
-
-  private
-
-  def valid_spot?(spot)
-    spot.match(/\d/) && (0..8).include?(spot.to_i)
-  end
 end
-
 
 if __FILE__ == $0
   Game.new.start_game
