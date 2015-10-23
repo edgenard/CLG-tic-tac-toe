@@ -6,7 +6,7 @@ RSpec.describe "Board" do
   it "creates the game board as an array" do
     board = Board.new
 
-    result = board.board
+    result = board.state
 
     expect(result).to match(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
   end
