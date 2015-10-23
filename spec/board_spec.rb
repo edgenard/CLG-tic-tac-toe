@@ -44,5 +44,49 @@ RSpec.describe "Board" do
     expect(result).to be true
   end
 
+  it "game is over if top row is all X" do
+    board = Board.new
+    board[0], board[1], board[2] = "X", "X", "X"
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if middle row is all O" do
+    board = Board.new
+    board[3], board[4], board[5] = "O", "O", "O"
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if middle row is all X" do
+    board = Board.new
+    board[3], board[4], board[5] = "X", "X", "X"
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if bottom row is all O" do
+    board = Board.new
+    board[6], board[7], board[8] = "O", "O", "O"
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if bottom row is all X" do
+    board = Board.new
+    board[6], board[7], board[8] = "O", "O", "O"
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
 
 end
