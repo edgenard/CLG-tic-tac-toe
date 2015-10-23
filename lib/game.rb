@@ -30,6 +30,7 @@ class Game
         @board[spot] = @hum
       else
         spot = nil
+        puts "Please choose an empty spot"
       end
     end
   end
