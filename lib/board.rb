@@ -17,4 +17,27 @@ class Board
     @board[idx] = value
   end
 
+  def game_over?
+    check_rows
+  end
+
+  private
+
+  def check_rows
+    [board[0], board[1], board[2]].uniq.length == 1 ||
+    [board[3], board[4], board[5]].uniq.length == 1 ||
+    [board[6], board[7], board[8]].uniq.length == 1
+  end
+
+  def check_columns
+    [board[0], board[3], board[6]].uniq.length == 1 ||
+    [board[1], board[4], board[7]].uniq.length == 1 ||
+    [board[2], board[5], board[8]].uniq.length == 1
+  end
+
+  def check_diagonals
+    [board[0], board[4], board[8]].uniq.length == 1 ||
+    [board[2], board[4], board[6]].uniq.length == 1
+  end
+
 end
