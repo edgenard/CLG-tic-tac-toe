@@ -2,24 +2,38 @@ class Game
 
   attr_reader :board
 
+  MESSAGES = {
+    welcome: "Welcome to my Tic Tac Toe game",
+    select: "Please select your spot.",
+    game_over: "Game over"
+  }
+
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     @com = "X"
     @hum = "O"
   end
 
+
+
   def start_game
-    puts "Welcome to my Tic Tac Toe game"
-    puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
-    puts "Please select your spot."
+    puts MESSAGES[:welcome]
+    puts display_board
+    puts MESSAGES[:select]
     until game_is_over(@board) || tie(@board)
       get_human_spot
       if !game_is_over(@board) && !tie(@board)
         eval_board
+
       end
-      puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+      puts display_board
+      puts MESSAGES[:select] if !game_is_over(@board) && !tie(@board)
     end
-    puts "Game over"
+    puts MESSAGES[:game_over]
+  end
+
+  def display_board
+    "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
   end
 
   def get_human_spot
