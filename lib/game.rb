@@ -35,28 +35,20 @@ class Game
   end
 
   def eval_board
-    spot = nil
-    until spot
-      if @board[4] == "4"
-        spot = 4
-        @board[spot] = @com
-      else
-        spot = get_best_move(@board, @com)
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
-        else
-          spot = nil
-        end
-      end
+    if @board[4] == "4"
+      @board[4] = @com
+    else
+      spot = get_best_move(@board, @com)
+      @board[spot] = @com
     end
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
     dup_board = board.dup
     available_spaces = get_available_spaces(dup_board)
-    return available_spaces.first if available_spaces.length < 2
+    return available_spaces.first.to_i if available_spaces.length < 2
 
-    best_move = nil  
+    best_move = nil
     available_spaces.each do |as|
       dup_board[as.to_i] = next_player
       if game_is_over(dup_board)
