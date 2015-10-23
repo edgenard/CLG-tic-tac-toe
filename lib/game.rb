@@ -20,15 +20,16 @@ class Game
     puts MESSAGES[:welcome]
     puts display_board
     puts MESSAGES[:select]
+
     until game_is_over(@board) || tie(@board)
       get_human_spot
       if !game_is_over(@board) && !tie(@board)
         eval_board
-
       end
       puts display_board
       puts MESSAGES[:select] if !game_is_over(@board) && !tie(@board)
     end
+    
     puts MESSAGES[:game_over]
   end
 
