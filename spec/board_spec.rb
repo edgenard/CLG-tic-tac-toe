@@ -187,7 +187,25 @@ RSpec.describe "Board" do
 
     result = board.tie?
 
-    expect(result).to be true  
+    expect(result).to be true
+  end
+
+  it "is not a tie when X has won" do
+    board = Board.new
+    board[0], board[4], board[8] = 'X', 'X', 'X'
+
+    result = board.tie?
+
+    expect(result).to be false
+  end
+
+  it "is not a tie when O has won" do
+    board = Board.new
+    board[6], board[7], board[8] = 'O', 'O', 'O'
+
+    result = board.tie?
+
+    expect(result).to be false
   end
 
 

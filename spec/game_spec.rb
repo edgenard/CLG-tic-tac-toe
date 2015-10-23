@@ -8,6 +8,14 @@ RSpec.describe "Game" do
     expect(game).to be_kind_of(Game)
   end
 
+  it "creates a new board when initialized" do
+    game = Game.new
+
+    result = game.board
+
+    expect(result).to be_kind_of(Board)
+  end
+
   it "is over if the top row is all O" do
     game = Game.new
     board = ["O", "O", "O","3", "4", "5", "6" "7", "8"]
