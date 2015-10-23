@@ -5,7 +5,8 @@ class Game
   MESSAGES = {
     welcome: "Welcome to my Tic Tac Toe game",
     select: "Please select your spot.",
-    game_over: "Game over"
+    game_over: "Game over",
+    invalid_spot: "Please choose a valid empty spot."
   }
 
   def initialize
@@ -29,7 +30,7 @@ class Game
       puts display_board
       puts MESSAGES[:select] if !game_is_over(@board) && !tie(@board)
     end
-    
+
     puts MESSAGES[:game_over]
   end
 
@@ -45,7 +46,7 @@ class Game
         @board[spot.to_i] = @hum
       else
         spot = nil
-        puts "Please choose a valid empty spot"
+
       end
     end
   end
