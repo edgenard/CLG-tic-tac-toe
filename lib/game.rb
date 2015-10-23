@@ -48,17 +48,15 @@ class Game
     available_spaces = get_available_spaces(dup_board)
     return available_spaces.first.to_i if available_spaces.length < 2
 
-    best_move = nil
+
     available_spaces.each do |as|
       dup_board[as.to_i] = next_player
       if game_is_over(dup_board)
-        best_move = as.to_i
-        return best_move
+        return  as.to_i
       else
         dup_board[as.to_i] = @hum
         if game_is_over(dup_board)
-          best_move = as.to_i
-          return best_move
+          return as.to_i
         else
           dup_board[as.to_i] = as
         end
