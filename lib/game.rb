@@ -1,4 +1,4 @@
-require 'board'
+require_relative 'board'
 
 class Game
 
@@ -17,52 +17,49 @@ class Game
     @hum = "O"
   end
 
-  def board
-    @board.board
+  def state
+    board.state
   end
 
 
   def start_game
     puts MESSAGES[:welcome]
-    puts display_board
+    puts board.display
     puts MESSAGES[:select]
 
-    until game_is_over(@board) || tie(@board)
+    until board.game_over? || board.tie?
       get_human_spot
-      if !game_is_over(@board) && !tie(@board)
+      if !board.game_over? && !board.tie?
         eval_board
       end
-      puts display_board
-      puts MESSAGES[:select] if !game_is_over(@board) && !tie(@board)
+      puts board.display
+      puts MESSAGES[:select] if !board.game_over? && !board.tie?
     end
 
     puts MESSAGES[:game_over]
   end
 
-  def display_board
-    "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
-  end
 
   def get_human_spot
     spot = nil
     until spot
       spot = gets.chomp
       if valid_spot?(spot)
-        @board[spot.to_i] = @hum
+        board[spot.to_i] = @hum
       else
         spot = nil
-
+        puts MESSAGES[:invalid_spot]
       end
     end
   end
 
 
   def eval_board
-    if @board[4] == "4"
-      @board[4] = @com
+    if board[4] == "4"
+      board[4] = @com
     else
-      spot = get_best_move(@board, @com)
-      @board[spot] = @com
+      spot = get_best_move(state, @com)
+      board[spot] = @com
     end
   end
 
@@ -91,39 +88,10 @@ class Game
 
   end
 
-  def game_is_over(board)
-    check_rows(board) ||
-    check_columns(board) ||
-    check_diagonals(board)
-  end
 
-  def tie(board)
-    board.all? { |spot| spot == "X" || spot == "O" }
-  end
 
 
   private
-
-  def check_rows(board)
-    [board[0], board[1], board[2]].uniq.length == 1 ||
-    [board[3], board[4], board[5]].uniq.length == 1 ||
-    [board[6], board[7], board[8]].uniq.length == 1
-  end
-
-  def check_columns(board)
-    [board[0], board[3], board[6]].uniq.length == 1 ||
-    [board[1], board[4], board[7]].uniq.length == 1 ||
-    [board[2], board[5], board[8]].uniq.length == 1
-  end
-
-  def check_diagonals(board)
-    [board[0], board[4], board[8]].uniq.length == 1 ||
-    [board[2], board[4], board[6]].uniq.length == 1
-  end
-
-  def get_available_spaces(board)
-    board.select {|spot| spot != "X" && spot != "O"}
-  end
 
   def valid_spot?(spot)
     spot.match(/\d/) && (0..8).include?(spot.to_i)
