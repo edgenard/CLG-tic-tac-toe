@@ -26,7 +26,7 @@ class Game
     spot = nil
     until spot
       spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
+      if @board[spot] != "X" && @board[spot] != "O" && valid_spot(spot)?
         @board[spot] = @hum
       else
         spot = nil
@@ -34,6 +34,7 @@ class Game
       end
     end
   end
+
 
   def eval_board
     if @board[4] == "4"
@@ -103,6 +104,9 @@ class Game
     board.select {|spot| spot != "X" && spot != "O"}
   end
 
+  def valid_spot?(spot)
+    (0..8).include? spot
+  end
 end
 
 
