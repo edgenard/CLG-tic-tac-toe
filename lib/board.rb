@@ -18,7 +18,7 @@ class Board
   end
 
   def game_over?
-    check_rows? 
+    check_rows? || check_columns?
   end
 
   private

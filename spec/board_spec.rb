@@ -89,4 +89,59 @@ RSpec.describe "Board" do
     expect(result).to be true
   end
 
+  it "game is over if the first column is all O" do
+    board = Board.new
+    board[0], board[3], board[6] = 'O', 'O', 'O'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the first column is all X" do
+    board = Board.new
+    board[0], board[3], board[6] = 'X', 'X', 'X'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the middle column is all O" do
+    board = Board.new
+    board[1], board[4], board[7] = 'O', 'O', 'O'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the middle column is all X" do
+    board = Board.new
+    board[1], board[4], board[7] = 'X', 'X', 'X'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the last column is all O" do
+    board = Board.new
+    board[2], board[5], board[8] = 'O', 'O', 'O'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the last column is all X" do
+    board = Board.new
+    board[2], board[5], board[8] = 'X', 'X', 'X'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+
 end
