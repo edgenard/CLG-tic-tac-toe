@@ -143,5 +143,43 @@ RSpec.describe "Board" do
     expect(result).to be true
   end
 
+  it "game is over if the left diagonal is all O" do
+    board = Board.new
+    board[0], board[4], board[8] = 'O', 'O', 'O'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the left diagonal is all X" do
+    board = Board.new
+    board[0], board[4], board[8] = 'X', 'X', 'X'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the right diagonal is all O" do
+    board = Board.new
+    board[2], board[4], board[6] = 'O', 'O', 'O'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+  it "game is over if the right diagonal is all X" do
+    board = Board.new
+    board[2], board[4], board[6] = 'X', 'X', 'X'
+
+    result = board.game_over?
+
+    expect(result).to be true
+  end
+
+
+
 
 end
