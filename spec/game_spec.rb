@@ -208,7 +208,7 @@ RSpec.describe "Game" do
     expect(result).to be true
   end
 
-  it "picks the middle of spot if available" do
+  it "picks the middle of the board if available" do
     game = Game.new
 
     game.eval_board

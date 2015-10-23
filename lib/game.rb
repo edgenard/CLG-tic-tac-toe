@@ -54,19 +54,9 @@ class Game
   def get_best_move(board, next_player, depth = 0, best_score = {})
     dup_board = board.dup
     available_spaces = get_available_spaces(dup_board)
+    return available_spaces.first if available_spaces.length < 2
 
-    if available_spaces.length < 2
-      best_move = available_spaces.first
-      return best_move
-    end
-    best_move = nil
-
-
-    # Go through the available spaces
-    # Fill in each space with the Computer's marker
-    # If that ends the game return that as the best_move
-    # Else fill in the space with human marker
-    # If that ends the game return that as the best move.
+    best_move = nil  
     available_spaces.each do |as|
       dup_board[as.to_i] = next_player
       if game_is_over(dup_board)
