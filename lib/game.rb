@@ -25,12 +25,12 @@ class Game
   def get_human_spot
     spot = nil
     until spot
-      spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O" && valid_spot(spot)?
-        @board[spot] = @hum
+      spot = gets.chomp
+      if valid_spot?(spot)
+        @board[spot.to_i] = @hum
       else
         spot = nil
-        puts "Please choose an empty spot"
+        puts "Please choose a valid empty spot"
       end
     end
   end
@@ -105,7 +105,7 @@ class Game
   end
 
   def valid_spot?(spot)
-    (0..8).include? spot
+    spot.match(/\d/) && (0..8).include?(spot.to_i)
   end
 end
 
