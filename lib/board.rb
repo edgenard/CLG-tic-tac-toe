@@ -21,6 +21,10 @@ class Board
     check_rows? || check_columns? || check_diagonals?
   end
 
+  def tie?
+    !game_over? && board.all? { |spot| spot == "X" || spot == "O" }
+  end
+
   private
 
   def check_rows?

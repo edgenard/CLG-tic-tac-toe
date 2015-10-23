@@ -179,6 +179,17 @@ RSpec.describe "Board" do
     expect(result).to be true
   end
 
+  it "is a tie if the all places are filled without a winner" do
+    board = Board.new
+    board[0], board[1], board[2] = 'X', 'O', 'X'
+    board[3], board[4], board[5] = 'O', 'O', 'X'
+    board[6], board[7], board[8] = 'O', 'X', 'O'
+
+    result = board.tie?
+
+    expect(result).to be true  
+  end
+
 
 
 
