@@ -1,8 +1,8 @@
 require_relative 'board'
-
+require_relative 'player'
 class Game
 
-  attr_reader :board
+  attr_reader :board, :player1, :player2
 
   MESSAGES = {
     welcome: "Welcome to my Tic Tac Toe game",
@@ -13,8 +13,8 @@ class Game
 
   def initialize
     @board = Board.new
-    @com = "X"
-    @hum = "O"
+    @player1 = Player.new('O', true)
+    @player2 = Player.new('X')
   end
 
   def start_game
@@ -23,11 +23,23 @@ class Game
     puts MESSAGES[:select]
 
     until board.game_over? || board.tie?
-      #player1.choose_spot(board)
-      get_human_spot 
+
+      if player1.human?
+        spot = get_human_spot(player1.mark)
+      else
+        spot = player1.choose_spot(board)
+        board[spot] = player1.mark
+      end
+
       if !board.game_over? && !board.tie?
-        #player2.choose_spot(board)
-        eval_board
+
+        if player2.human?
+          spot = get_human_spot(player2.mark)
+        else
+          spot = player2.choose_spot(board)
+          board[spot] = player2.mark
+        end
+        
       end
       puts board.display
       puts MESSAGES[:select] if !board.game_over? && !board.tie?
@@ -36,12 +48,12 @@ class Game
     puts MESSAGES[:game_over]
   end
 
-  def get_human_spot
+  def get_human_spot(mark)
     spot = nil
     until spot
       spot = gets.chomp
       if board.valid_spot?(spot)
-        board[spot.to_i] = @hum
+        board[spot.to_i] = mark
       else
         spot = nil
         puts MESSAGES[:invalid_spot]
@@ -49,38 +61,6 @@ class Game
     end
   end
 
-  def eval_board
-    if board[4] == "4"
-      board[4] = @com
-    else
-      spot = get_best_move(board, @com)
-      board[spot] = @com
-    end
-  end
-
-  def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = board.available_spaces
-    return available_spaces.first.to_i if available_spaces.length < 2
-
-    available_spaces.each do |as|
-      board[as.to_i] = next_player
-      if board.game_over?
-        board[as.to_i] = as
-        return  as.to_i
-      else
-        board[as.to_i] = @hum
-        if board.game_over?
-          board[as.to_i] = as
-          return as.to_i
-        else
-          board[as.to_i] = as
-        end
-      end
-    end
-
-    n = rand(0..available_spaces.count)
-    return available_spaces[n].to_i
-  end
 
 end
 
