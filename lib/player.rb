@@ -18,6 +18,8 @@ class Player
 
   private
 
+
+
   def get_best_move(board, mark, depth = 0, best_score = {})
     available_spaces = board.available_spaces
     return available_spaces.first.to_i if available_spaces.length < 2

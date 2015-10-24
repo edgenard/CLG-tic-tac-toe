@@ -23,8 +23,10 @@ class Game
     puts MESSAGES[:select]
 
     until board.game_over? || board.tie?
+      #player1.choose_spot(board)
       get_human_spot
       if !board.game_over? && !board.tie?
+        #player2.choose_spot(board)
         eval_board
       end
       puts board.display

@@ -56,9 +56,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(7) 
+      expect(result).to eq(7)
     end
-
-
   end
 end
