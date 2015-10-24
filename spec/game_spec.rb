@@ -5,10 +5,20 @@ RSpec.describe "Game" do
 
   it "creates a new board when initialized" do
     game = Game.new
-
     result = game.board
 
     expect(result).to be_kind_of(Board)
+  end
+
+  it "sets up the players in the game" do
+    game = Game.new
+    player1 = Player.new("O", true)
+    player2 = Player.new("X")
+
+    game.setup(player1, player2)
+
+    expect(game.player1).to be_kind_of(Player)
+    expect(game.player2).to be_kind_of(Player)
   end
 
 
