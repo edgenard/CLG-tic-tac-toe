@@ -2,10 +2,13 @@
 class Repl
 
   def print(message)
-    $stdout.print(message)
+    puts message
   end
 
   def read
-
+    user_input = gets.chomp
+    user_input
   end
+
+
 end
