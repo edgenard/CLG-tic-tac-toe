@@ -10,5 +10,9 @@ class Repl
     user_input
   end
 
+  def print_board(board)
+    puts board.display
+  end
+
 
 end

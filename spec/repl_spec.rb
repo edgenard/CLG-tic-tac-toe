@@ -24,6 +24,6 @@ RSpec.describe "Repl" do
     board = Board.new
     board_display = "|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n"
 
-    expect(repl.print_board(board)).to output(board_display).to_stdout
+    expect{repl.print_board(board)}.to output(board_display).to_stdout
   end
 end
