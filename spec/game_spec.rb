@@ -43,7 +43,7 @@ RSpec.describe "Game" do
   it "plays until someone wins" do
     game = Game.new
     allow(game.repl).to receive(:print).and_return("")
-    allow(game).to receive(:get_human_spot).and_return("4")
+    allow(game).to receive(:get_human_spot).and_return(4)
     allow(game.board).to receive(:game_over?).and_return(false, false,false, true)
     allow(game.player2).to receive(:choose_spot).and_return(3)
 
