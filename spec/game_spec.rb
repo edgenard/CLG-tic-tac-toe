@@ -13,8 +13,8 @@ RSpec.describe "Game" do
   it "creates two players when initialized" do
     game = Game.new
 
-    player1 = game.player1
-    player2 = game.player2
+    player1 = game.instance_variable_get("@player1")
+    player2 = game.instance_variable_get("@player2")
 
     expect(player1).to be_kind_of(Player)
     expect(player2).to be_kind_of(Player)

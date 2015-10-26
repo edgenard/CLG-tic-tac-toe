@@ -3,7 +3,7 @@ require_relative 'player'
 require_relative 'repl'
 class Game
 
-  attr_reader :board, :player1, :player2
+  attr_reader :board
 
   MESSAGES = {
     welcome: "Welcome to my Tic Tac Toe game",
