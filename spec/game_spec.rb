@@ -54,5 +54,18 @@ RSpec.describe "Game" do
     expect(game.player2).to have_received(:choose_spot).once
   end
 
+  it "stops playing if there is a tie" do
+    game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
+    allow(game).to receive(:get_human_spot).and_return(4)
+    allow(game.board).to receive(:tie?).and_return(false, false,false, true)
+    allow(game.player2).to receive(:choose_spot).and_return(3)
+
+    game.play
+
+    expect(game).to have_received(:get_human_spot).once
+    expect(game.player2).to have_received(:choose_spot).once
+  end
+
 
 end

@@ -32,16 +32,17 @@ class Game
   def play
     until board.game_over? || board.tie?
       if player1.human?
-        spot = get_human_spot(player1.mark)
+        spot = get_human_spot
+        board[spot] = player1.mark
       else
         spot = player1.choose_spot(board)
         board[spot] = player1.mark
       end
 
-
       if !board.game_over? && !board.tie?
         if player2.human?
-          spot = get_human_spot(player2.mark)
+          spot = get_human_spot
+          board[spot] = player2.mark
         else
           spot = player2.choose_spot(board)
           board[spot] = player2.mark
@@ -54,22 +55,18 @@ class Game
 
   end
 
-  def get_human_spot(mark)
+  def get_human_spot
     spot = nil
     until spot
       spot = repl.read
       if board.valid_spot?(spot)
-        board[spot.to_i] = mark
+        return spot.to_i
       else
         spot = nil
         repl.print(MESSAGES[:invalid_spot])
       end
     end
   end
-
-  private
-
-
 
 end
 
