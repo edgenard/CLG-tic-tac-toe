@@ -20,5 +20,13 @@ RSpec.describe "Game" do
     expect(player2).to be_kind_of(Player)
   end
 
+  it "creates a new repl when initialized" do
+    game = Game.new
+
+    result = game.instance_variable_get("@repl")
+
+    expect(result).to be_kind_of(Repl)
+  end
+
 
 end

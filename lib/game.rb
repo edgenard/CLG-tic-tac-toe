@@ -1,5 +1,6 @@
 require_relative 'board'
 require_relative 'player'
+require_relative 'repl'
 class Game
 
   attr_reader :board, :player1, :player2
@@ -15,6 +16,7 @@ class Game
     @board = Board.new
     @player1 = Player.new('O', true)
     @player2 = Player.new('X')
+    @repl = Repl.new
   end
 
   def start_game

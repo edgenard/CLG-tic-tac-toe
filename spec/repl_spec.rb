@@ -18,6 +18,4 @@ RSpec.describe "Repl" do
 
     expect(result).to eq(message)
   end
-
-
  end
