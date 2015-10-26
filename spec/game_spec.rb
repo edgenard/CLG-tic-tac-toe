@@ -30,16 +30,29 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
+  it "#start_game calls #play" do
+    game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
+    allow(game).to receive(:play).and_return(nil)
+
+    game.start_game
+
+    expect(game).to have_received(:play)
+  end
+
   it "plays until someone wins" do
     game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
     allow(game).to receive(:get_human_spot).and_return("4")
     allow(game.board).to receive(:game_over?).and_return(false, false,false, true)
     allow(game.player2).to receive(:choose_spot).and_return(3)
-    allow(game.repl).to receive(:print).and_return("")
+
 
     game.play
 
     expect(game).to have_received(:get_human_spot).once
     expect(game.player2).to have_received(:choose_spot).once
   end
+
+
 end

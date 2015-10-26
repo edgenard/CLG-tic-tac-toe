@@ -24,27 +24,7 @@ class Game
     repl.print(board.display)
     repl.print(MESSAGES[:select])
 
-    until board.game_over? || board.tie?
-      if player1.human?
-        spot = get_human_spot(player1.mark)
-      else
-        spot = player1.choose_spot(board)
-        board[spot] = player1.mark
-      end
-
-      if !board.game_over? && !board.tie?
-
-        if player2.human?
-          spot = get_human_spot(player2.mark)
-        else
-          spot = player2.choose_spot(board)
-          board[spot] = player2.mark
-        end
-
-      end
-       repl.print(board.display)
-       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
-    end
+    play
 
     repl.print(MESSAGES[:game_over])
   end
