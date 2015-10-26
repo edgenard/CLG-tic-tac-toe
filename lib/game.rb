@@ -49,8 +49,8 @@ class Game
         end
       end
 
-       repl.print(board.display)
-       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
+      repl.print(board.display)
+      repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
 
   end
