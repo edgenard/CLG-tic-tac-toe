@@ -5,7 +5,8 @@ RSpec.describe "Game" do
 
   it "creates a new board when initialized" do
     game = Game.new
-    result = game.board
+
+    result = game.instance_variable_get("@board")
 
     expect(result).to be_kind_of(Board)
   end

@@ -3,7 +3,7 @@ require_relative 'player'
 require_relative 'repl'
 class Game
 
-  attr_reader :board
+
 
   MESSAGES = {
     welcome: "Welcome to my Tic Tac Toe game",
@@ -20,10 +20,9 @@ class Game
   end
 
   def start_game
-    # repl.print(MESSAGES[:welcome])
-    puts MESSAGES[:welcome]
-    puts board.display
-    puts MESSAGES[:select]
+    repl.print(MESSAGES[:welcome])
+    repl.print(board.display)
+    reple.print(MESSAGES[:select])
 
     until board.game_over? || board.tie?
 
@@ -44,11 +43,11 @@ class Game
         end
 
       end
-      puts board.display
-      puts MESSAGES[:select] if !board.game_over? && !board.tie?
+       repl.print(board.display)
+       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
 
-    puts MESSAGES[:game_over]
+    repl.print(MESSAGES[:game_over])
   end
 
   def get_human_spot(mark)
@@ -59,10 +58,13 @@ class Game
         board[spot.to_i] = mark
       else
         spot = nil
-        puts MESSAGES[:invalid_spot]
+        repl.print(MESSAGES[:invalid_spot])
       end
     end
   end
+
+  private
+  attr_reader :board, :player1, :player2, :repl
 
 
 end
