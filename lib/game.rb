@@ -22,7 +22,7 @@ class Game
   def start_game
     repl.print(MESSAGES[:welcome])
     repl.print(board.display)
-    reple.print(MESSAGES[:select])
+    repl.print(MESSAGES[:select])
 
     until board.game_over? || board.tie?
 
@@ -53,7 +53,7 @@ class Game
   def get_human_spot(mark)
     spot = nil
     until spot
-      spot = gets.chomp
+      spot = repl.read
       if board.valid_spot?(spot)
         board[spot.to_i] = mark
       else
