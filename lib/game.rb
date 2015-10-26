@@ -1,9 +1,9 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'repl'
+require 'byebug'
 class Game
-
-
+  attr_reader :board, :player1, :player2, :repl
 
   MESSAGES = {
     welcome: "Welcome to my Tic Tac Toe game",
@@ -25,7 +25,6 @@ class Game
     repl.print(MESSAGES[:select])
 
     until board.game_over? || board.tie?
-
       if player1.human?
         spot = get_human_spot(player1.mark)
       else
@@ -59,6 +58,7 @@ class Game
         board[spot] = player1.mark
       end
 
+
       if !board.game_over? && !board.tie?
         if player2.human?
           spot = get_human_spot(player2.mark)
@@ -67,7 +67,7 @@ class Game
           board[spot] = player2.mark
         end
       end
-      
+
        repl.print(board.display)
        repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
@@ -88,7 +88,7 @@ class Game
   end
 
   private
-  attr_reader :board, :player1, :player2, :repl
+
 
 
 end
