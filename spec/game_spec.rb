@@ -29,5 +29,14 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
+  it "plays until someone wins" do
+    game = Game.new
+    board = double("board")
+    allow(game).to receive(:get_human_spot).and_return("4")
+    allow(board).to receive(:game_over?).and_return(false, true)
 
+    game.play
+
+    expect(game).to receive(:get_human_spot).once
+  end
 end
