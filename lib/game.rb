@@ -18,6 +18,7 @@ class Game
   end
 
   def start_game
+    # repl.print(MESSAGES[:welcome])
     puts MESSAGES[:welcome]
     puts board.display
     puts MESSAGES[:select]
@@ -39,7 +40,7 @@ class Game
           spot = player2.choose_spot(board)
           board[spot] = player2.mark
         end
-        
+
       end
       puts board.display
       puts MESSAGES[:select] if !board.game_over? && !board.tie?
