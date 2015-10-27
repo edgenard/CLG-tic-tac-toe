@@ -67,5 +67,13 @@ RSpec.describe "Game" do
     expect(game.player2).to have_received(:choose_spot).once
   end
 
+  it "formats the board for the cli" do
+    game = Game.new
+
+    result = game.format_board
+
+    expect(result).to eq("|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n")
+  end
+
 
 end
