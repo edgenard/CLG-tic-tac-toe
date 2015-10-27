@@ -47,7 +47,6 @@ class Game
         else
           spot = player2.choose_spot(board)
           board[spot] = player2.mark
-
         end
       end
 

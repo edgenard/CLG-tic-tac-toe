@@ -97,10 +97,20 @@ RSpec.describe "Game" do
     it "sleeps between turns" do
       allow(game.board).to receive(:game_over?).and_return(false, false, false, true)
 
-
       game.play
 
       expect(game).to have_received(:sleep).twice
+    end
+
+    it "colorizes player marks" do
+      allow(game.board).to receive(:game_over?).and_return(false, false, false, true)
+      allow(game.player1.mark).to receive(:colorize)
+      allow(game.player2.mark).to receive(:colorize)
+
+      game.play
+
+      expect(game.player1.mark).to have_received(:colorize)
+      expect(game.player2.mark).to have_received(:colorize)
     end
   end
 
