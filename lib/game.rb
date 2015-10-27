@@ -18,8 +18,6 @@ class Game
 
   def initialize
     @board = Board.new
-    @player1 = Player.new('O', true)
-    @player2 = Player.new('X')
     @repl = Repl.new
   end
 
