@@ -1,7 +1,7 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'repl'
-require 'colorize'
+
 require 'byebug'
 class Game
   attr_reader :board, :player1, :player2, :repl
@@ -11,7 +11,9 @@ class Game
     select: "Please select your spot.",
     game_over: "Game over",
     invalid_spot: "Please choose a valid empty spot.",
-    player2_choice: "Player 2 chose "
+    player2_choice: "Player 2 chose ",
+    pick_players: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
+    invalid_player_choice: "Please choose 1, 2 or 3"
   }
 
   def initialize
@@ -33,8 +35,7 @@ class Game
   end
 
   def pick_players
-    repl.print("Please choose the type of game you would like to play")
-    repl.print("Choose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer")
+    repl.print(MESSAGES[:pick_players])
 
     user_choice = nil
     until user_choice do
@@ -43,30 +44,11 @@ class Game
         setup_players(user_choice)
       else
         user_choice = nil
-        repl.print("Please choose 1, 2 or 3.")
+        repl.print(MESSAGES[:invalid_player_choice])
       end
     end
 
   end
-
-  def setup_players(user_choice)
-    case user_choice
-    when "1"
-      @player1 = Player.new("O", true)
-      @player2 = Player.new("X", true)
-    when "2"
-      @player1 = Player.new("O")
-      @player2 = Player.new("X")
-    when "3"
-      @player1 = Player.new("O", true)
-      @player2 = Player.new("X")
-    end
-  end
-
-  def valid_choice?(input, possible_choices)
-    possible_choices.include?(input)
-  end
-
 
   def play
     until board.game_over? || board.tie?
@@ -107,6 +89,25 @@ class Game
         repl.print(MESSAGES[:invalid_spot])
       end
     end
+  end
+
+  private
+  def setup_players(user_choice)
+    case user_choice
+    when "1"
+      @player1 = Player.new("O", true)
+      @player2 = Player.new("X", true)
+    when "2"
+      @player1 = Player.new("O")
+      @player2 = Player.new("X")
+    when "3"
+      @player1 = Player.new("O", true)
+      @player2 = Player.new("X")
+    end
+  end
+
+  def valid_choice?(input, possible_choices)
+    possible_choices.include?(input)
   end
 
 end

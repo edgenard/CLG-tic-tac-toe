@@ -1,7 +1,7 @@
 #Repl is responsible for communicating with the user via the cli
+require 'colorize'
+
 class Repl
-
-
   def print(message)
     puts "\n" + message
   end
