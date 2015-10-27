@@ -21,7 +21,11 @@ RSpec.describe "Repl" do
 
   it "clears the console" do
     repl = Repl.new
+    system = double("system")
+    allow(repl).to receive(:system)
 
-    expect{repl.clear}.to output("clear" + "\n").to_stdout
+    repl.clear
+
+    expect(repl).to have_received(:system)
   end
  end

@@ -12,7 +12,7 @@ class Repl
   end
 
   def clear
-    puts "clear"
+    system("clear")
   end
 
 

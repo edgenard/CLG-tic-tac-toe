@@ -75,5 +75,18 @@ RSpec.describe "Game" do
     expect(result).to eq("|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n")
   end
 
+  it "clears the board for after each turn" do
+    game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
+    allow(game).to receive(:get_human_spot).and_return(4)
+    allow(game.board).to receive(:tie?).and_return(false, false,false, true)
+    allow(game.player2).to receive(:choose_spot).and_return(3)
+    allow(game.repl).to receive(:clear)
+
+    game.play
+
+    expect(game.repl).to have_received(:clear).once
+  end
+
 
 end
