@@ -11,14 +11,6 @@ RSpec.describe "Board" do
     expect(result).to match(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
   end
 
-  it "displays the board" do
-    board = Board.new
-
-    result = board.display
-
-    expect(result).to eq("|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n")
-  end
-
   it "returns the value of spot on the board" do
     board = Board.new
 

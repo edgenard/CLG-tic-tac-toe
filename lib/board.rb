@@ -5,9 +5,6 @@ class Board
     @state = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
   end
 
-  def display
-    "|_#{state[0]}_|_#{state[1]}_|_#{state[2]}_|\n|_#{state[3]}_|_#{state[4]}_|_#{state[5]}_|\n|_#{state[6]}_|_#{state[7]}_|_#{state[8]}_|\n"
-  end
 
   def [](idx)
     @state[idx]
