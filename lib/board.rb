@@ -22,7 +22,7 @@ class Board
   end
 
   def available_spaces
-    state.select {|space| space != 'X' && space != 'O'}
+    state.select {|space| space.to_i.to_s == space}
   end
 
   def valid_spot?(spot)
