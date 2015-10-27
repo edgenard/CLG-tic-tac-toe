@@ -9,7 +9,8 @@ class Game
     welcome: "Welcome to my Tic Tac Toe game",
     select: "Please select your spot.",
     game_over: "Game over",
-    invalid_spot: "Please choose a valid empty spot."
+    invalid_spot: "Please choose a valid empty spot.",
+    player2_choice: "Player 2 chose "
   }
 
   def initialize
@@ -46,10 +47,12 @@ class Game
         else
           spot = player2.choose_spot(board)
           board[spot] = player2.mark
+
         end
       end
 
       repl.clear
+      repl.print(MESSAGES[:player2_choice] + spot.to_s)
       repl.print(format_board)
       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end

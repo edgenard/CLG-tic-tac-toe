@@ -88,5 +88,18 @@ RSpec.describe "Game" do
     expect(game.repl).to have_received(:clear).once
   end
 
+  it "notifies the user of computer choice" do
+    game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
+    allow(game).to receive(:get_human_spot).and_return(4)
+    allow(game.board).to receive(:tie?).and_return(false, false,false, true)
+    allow(game.player2).to receive(:choose_spot).and_return(3)
+    allow(game.repl).to receive(:clear)
+
+    game.play
+
+    expect(game.repl).to have_received(:print).with("Player 2 chose 3")
+  end
+
 
 end
