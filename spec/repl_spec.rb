@@ -18,4 +18,10 @@ RSpec.describe "Repl" do
 
     expect(result).to eq(message)
   end
+
+  it "clears the console" do
+    repl = Repl.new
+
+    expect{repl.clear}.to output("clear" + "\n").to_stdout
+  end
  end

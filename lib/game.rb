@@ -21,7 +21,7 @@ class Game
 
   def start_game
     repl.print(MESSAGES[:welcome])
-    repl.print(board.display)
+    repl.print(format_board)
     repl.print(MESSAGES[:select])
 
     play
@@ -49,7 +49,7 @@ class Game
         end
       end
 
-      repl.print(board.display)
+      repl.print(format_board)
       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
   end

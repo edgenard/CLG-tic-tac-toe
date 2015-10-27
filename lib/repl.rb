@@ -11,5 +11,9 @@ class Repl
     user_input
   end
 
+  def clear
+    puts "clear"
+  end
+
 
 end
