@@ -30,6 +30,51 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
+  it "allows users to pick players before starting to play" do
+    game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
+    allow(game.repl).to receive(:print_board).and_return("")
+    allow(game).to receive(:play).and_return(nil)
+    allow(game).to receive(:pick_players).and_return(nil)
+
+    game.start_game
+
+    expect(game).to have_received(:pick_players)
+  end
+
+  it "allows users to choose human vs human game" do
+    game = Game.new
+    allow(game.repl).to receive(:read).and_return("1")
+    allow(game.repl).to receive(:print).and_return("")
+
+    game.pick_players
+
+    expect(game.player1.human?).to be true
+    expect(game.player2.human?).to be true
+  end
+
+  it "allows users to choose a computer vs computer game" do
+    game = Game.new
+    allow(game.repl).to receive(:read).and_return("2")
+    allow(game.repl).to receive(:print).and_return("")
+
+    game.pick_players
+
+    expect(game.player1.human?).to be false
+    expect(game.player2.human?).to be false
+  end
+
+  it "allows users to choose a human vs computer game" do
+    game = Game.new
+    allow(game.repl).to receive(:read).and_return("3")
+    allow(game.repl).to receive(:print).and_return("")
+
+    game.pick_players
+
+    expect(game.player1.human?).to be true
+    expect(game.player2.human?).to be false
+  end
+
   describe "game play" do
     let(:game){ Game.new}
 
@@ -39,12 +84,11 @@ RSpec.describe "Game" do
       allow(game).to receive(:get_human_spot).and_return(4)
       allow(game.player2).to receive(:choose_spot).and_return(3)
       allow(game).to receive(:sleep).and_return(nil)
-
     end
 
     it "#start_game calls #play" do
       allow(game).to receive(:play).and_return(nil)
-
+      allow(game).to receive(:pick_players).and_return(nil)
       game.start_game
 
       expect(game).to have_received(:play)
