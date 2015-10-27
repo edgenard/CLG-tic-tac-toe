@@ -1,6 +1,7 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'repl'
+require 'colorize'
 require 'byebug'
 class Game
   attr_reader :board, :player1, :player2, :repl
@@ -33,25 +34,23 @@ class Game
   def play
     until board.game_over? || board.tie?
       if player1.human?
-        spot = get_human_spot
-        board[spot] = player1.mark
+        spot1 = get_human_spot
       else
-        spot = player1.choose_spot(board)
-        board[spot] = player1.mark
+        spot1 = player1.choose_spot(board)
       end
+        board[spot1] = player1.mark
 
       if !board.game_over? && !board.tie?
         if player2.human?
-          spot = get_human_spot
-          board[spot] = player2.mark
+          spot2 = get_human_spot
         else
-          spot = player2.choose_spot(board)
-          board[spot] = player2.mark
+          spot2 = player2.choose_spot(board)
         end
+        board[spot2] = player2.mark
       end
 
       repl.clear
-      repl.print(MESSAGES[:player2_choice] + spot.to_s)
+      repl.print(MESSAGES[:player2_choice] + spot2.to_s)
       sleep 1
       repl.print(format_board)
       sleep 1
@@ -59,9 +58,6 @@ class Game
     end
   end
 
-  def format_board
-    "|_#{board[0]}_|_#{board[1]}_|_#{board[2]}_|\n|_#{board[3]}_|_#{board[4]}_|_#{board[5]}_|\n|_#{board[6]}_|_#{board[7]}_|_#{board[8]}_|\n"
-  end
 
   def get_human_spot
     spot = nil

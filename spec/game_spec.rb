@@ -30,14 +30,6 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
-  it "formats the board for the cli" do
-    game = Game.new
-
-    result = game.format_board
-
-    expect(result).to eq("|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n")
-  end
-
   describe "game play" do
     let(:game){ Game.new}
 
@@ -102,16 +94,7 @@ RSpec.describe "Game" do
       expect(game).to have_received(:sleep).twice
     end
 
-    it "colorizes player marks" do
-      allow(game.board).to receive(:game_over?).and_return(false, false, false, true)
-      allow(game.player1.mark).to receive(:colorize)
-      allow(game.player2.mark).to receive(:colorize)
 
-      game.play
-
-      expect(game.player1.mark).to have_received(:colorize)
-      expect(game.player2.mark).to have_received(:colorize)
-    end
   end
 
 
