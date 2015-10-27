@@ -23,7 +23,7 @@ class Game
 
   def start_game
     repl.print(MESSAGES[:welcome])
-    repl.print(format_board)
+    repl.print_board(board)
     repl.print(MESSAGES[:select])
 
     play
@@ -52,7 +52,7 @@ class Game
       repl.clear
       repl.print(MESSAGES[:player2_choice] + spot2.to_s)
       sleep 1
-      repl.print(format_board)
+      repl.print_board(board)
       sleep 1
       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end

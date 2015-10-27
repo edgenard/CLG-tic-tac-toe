@@ -37,4 +37,14 @@ RSpec.describe "Repl" do
 
     expect{repl.print_board(board)}.to output("\n"+formatted_board).to_stdout
   end
+
+  it "colorizes X and O" do
+    repl = Repl.new
+    o_mark = "O".colorize(:red)
+    x_mark = "X".colorize(:green)
+    board = ["0", "O", "2", "3", "X", "5", "6", "7", "8"]
+    formatted_board = "|_0_|_#{o_mark}_|_2_|\n|_3_|_#{x_mark}_|_5_|\n|_6_|_7_|_8_|\n"
+
+    expect{repl.print_board(board)}.to output("\n" + formatted_board).to_stdout
+  end
  end
