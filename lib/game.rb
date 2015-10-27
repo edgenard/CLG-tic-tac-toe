@@ -53,13 +53,15 @@ class Game
 
       repl.clear
       repl.print(MESSAGES[:player2_choice] + spot.to_s)
+      sleep 1
       repl.print(format_board)
+      sleep 1
       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
   end
 
   def format_board
-    "|_#{board[0]}_|_#{board[1]}_|_#{board[2]}_|\n|_#{board[3]}_|_#{board[4]}_|_#{board[5]}_|\n|_#{board[6]}_|_#{board[7]}_|_#{board[8]}_|\n"
+    "|_#{board[0]}_|_#{board[1]}_|_#{board[2]}_|\n|_#{board[3]}_|_#{board[4]}_|_#{board[5]}_|\n|_#{board[6]}_|_#{board[7]}_|_#{board[8]}_|\n\n"
   end
 
   def get_human_spot
