@@ -35,7 +35,7 @@ RSpec.describe "Game" do
 
     result = game.format_board
 
-    expect(result).to eq("|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n\n")
+    expect(result).to eq("|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n")
   end
 
   describe "game play" do
@@ -46,6 +46,7 @@ RSpec.describe "Game" do
       allow(game.repl).to receive(:clear).and_return(nil)
       allow(game).to receive(:get_human_spot).and_return(4)
       allow(game.player2).to receive(:choose_spot).and_return(3)
+      allow(game).to receive(:sleep).and_return(nil)
 
     end
 
@@ -95,15 +96,12 @@ RSpec.describe "Game" do
 
     it "sleeps between turns" do
       allow(game.board).to receive(:game_over?).and_return(false, false, false, true)
-      allow(game).to receive(:sleep)
+
 
       game.play
 
       expect(game).to have_received(:sleep).twice
     end
-
-
-
   end
 
 

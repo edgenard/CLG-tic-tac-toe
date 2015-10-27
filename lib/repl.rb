@@ -3,7 +3,8 @@ class Repl
 
 
   def print(message)
-    puts message
+
+    puts "\n" + message
   end
 
   def read

@@ -6,7 +6,7 @@ RSpec.describe "Repl" do
     repl = Repl.new
     message = "Hello"
 
-    expect{repl.print(message)}.to output(message + "\n").to_stdout
+    expect{repl.print(message)}.to output("\n" + message + "\n").to_stdout
   end
 
   it "reads from stdin" do
