@@ -93,8 +93,6 @@ RSpec.describe "Game" do
 
       expect(game).to have_received(:sleep).twice
     end
-
-
   end
 
 
