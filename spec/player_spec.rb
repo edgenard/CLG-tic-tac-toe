@@ -11,10 +11,18 @@ RSpec.describe "Player" do
     expect(result).to eq('X')
   end
 
+  it "mark can be changed" do
+    player = Player.new("X")
+
+    player.mark = "O"
+
+    expect(player.mark).to eq("O")
+  end
+
   it "can be human" do
     player = Player.new('X', true)
 
-    result = player.human?
+    result = player.human
 
     expect(result).to be true
   end
@@ -22,9 +30,17 @@ RSpec.describe "Player" do
   it "can be a computer" do
     player = Player.new('X')
 
-    result = player.human?
+    result = player.human
 
     expect(result).to be false
+  end
+
+  it "human attribute can be changed" do
+    player = Player.new("X")
+
+    player.human = true
+
+    expect(player.human).to be_truthy
   end
 
   describe "Computer Player" do

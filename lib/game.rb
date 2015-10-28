@@ -49,7 +49,7 @@ class Game
     until board.game_over? || board.tie?
       repl.clear
       repl.print_board(board)
-      if player1.human?
+      if player1.human
         repl.print(MESSAGES[:select])
         spot1 = get_human_spot
       else
@@ -60,7 +60,7 @@ class Game
       repl.print_board(board)
 
       if !board.game_over? && !board.tie?
-        if player2.human?
+        if player2.human
           repl.print(MESSAGES[:select])
           spot2 = get_human_spot
         else

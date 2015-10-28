@@ -1,14 +1,11 @@
 #Player is responsible for players attributes and actions
 class Player
-  attr_reader :mark
+  attr_accessor :mark, :human
   def initialize(mark, human=false)
     @mark = mark
     @human = human
   end
 
-  def human?
-    @human
-  end
 
   def choose_spot(board)
     return 4 if board[4] == '4'

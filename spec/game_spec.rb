@@ -39,8 +39,8 @@ RSpec.describe "Game" do
 
     game.game_type
 
-    expect(game.player1.human?).to be true
-    expect(game.player2.human?).to be true
+    expect(game.player1.human).to be true
+    expect(game.player2.human).to be true
   end
 
   it "allows users to choose a computer vs computer game" do
@@ -50,8 +50,8 @@ RSpec.describe "Game" do
 
     game.game_type
 
-    expect(game.player1.human?).to be false
-    expect(game.player2.human?).to be false
+    expect(game.player1.human).to be false
+    expect(game.player2.human).to be false
   end
 
   it "allows users to choose a human vs computer game" do
@@ -61,8 +61,8 @@ RSpec.describe "Game" do
 
     game.game_type
 
-    expect(game.player1.human?).to be true
-    expect(game.player2.human?).to be false
+    expect(game.player1.human).to be true
+    expect(game.player2.human).to be false
   end
 
   it "keeps asking until user gives valid game type" do
