@@ -12,15 +12,6 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Board)
   end
 
-  it "creates two players when initialized" do
-    game = Game.new
-
-    player1 = game.player1
-    player2 = game.player2
-
-    expect(player1).to be_kind_of(Player)
-    expect(player2).to be_kind_of(Player)
-  end
 
   it "creates a new repl when initialized" do
     game = Game.new
@@ -79,6 +70,8 @@ RSpec.describe "Game" do
     let(:game){ Game.new}
 
     before(:each) do
+      game.player1 = Player.new("O", true)
+      game.player2 = Player.new("X")
       allow(game.repl).to receive(:print).and_return("")
       allow(game.repl).to receive(:clear).and_return(nil)
       allow(game).to receive(:get_human_spot).and_return(4)
