@@ -209,15 +209,4 @@ RSpec.describe "Board" do
     expect(result).to match(['0','2','4', '5', '7', '8'])
   end
 
-
-  it "#valid_spot?() returns true for an empty spot on the board" do
-    board = Board.new
-
-    result = board.valid_spot?("8")
-
-    expect(result).to be true
-  end
-
-
-
 end

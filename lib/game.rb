@@ -77,8 +77,8 @@ class Game
   def get_human_spot
     spot = nil
     until spot
-      spot = repl.read
-      if board.valid_spot?(spot)
+      spot = get_user_choice
+      if valid_choice?(spot, board.available_spaces)
         return spot.to_i
       else
         spot = nil

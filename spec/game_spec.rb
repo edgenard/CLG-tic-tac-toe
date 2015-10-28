@@ -65,6 +65,26 @@ RSpec.describe "Game" do
     expect(game.player2.human?).to be false
   end
 
+  it "returns a valid human spot" do
+    game = Game.new
+    allow(game).to receive(:get_user_choice).and_return("4")
+
+    result = game.get_human_spot
+
+    expect(result).to eq(4)
+  end
+
+  it "keeps asking until human gives valid spot" do
+    game = Game.new
+    allow(game).to receive(:get_user_choice).and_return("9", "4")
+    allow(game.repl).to receive(:print).and_return(nil)
+
+    result = game.get_human_spot
+
+    expect(game).to have_received(:get_user_choice).twice
+    expect(game.repl).to have_received(:print).with("Please choose a valid empty spot.").once
+  end
+
   describe "game play" do
     let(:game){ Game.new}
 
@@ -82,10 +102,12 @@ RSpec.describe "Game" do
     it "#start_game calls #play" do
       allow(game).to receive(:play).and_return(nil)
       allow(game).to receive(:pick_players).and_return(nil)
+
       game.start_game
 
       expect(game).to have_received(:play)
     end
+
 
     it "plays until someone wins" do
       allow(game.board).to receive(:game_over?).and_return(false, false,false, true)

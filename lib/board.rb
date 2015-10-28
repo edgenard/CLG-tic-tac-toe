@@ -25,10 +25,6 @@ class Board
     state.select {|space| space.to_i.to_s == space}
   end
 
-  def valid_spot?(spot)
-    spot.match(/\d/) && available_spaces.include?(spot)
-  end
-
   private
 
   def check_rows?
