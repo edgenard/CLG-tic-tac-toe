@@ -23,7 +23,6 @@ class Game
   def start_game
     repl.print(MESSAGES[:welcome])
     pick_players
-    repl.print_board(board)
 
     play
 
@@ -48,6 +47,7 @@ class Game
   def play
     until board.game_over? || board.tie?
       repl.clear
+      repl.print_board(board)
       if player1.human?
         repl.print(MESSAGES[:select])
         spot1 = get_human_spot
