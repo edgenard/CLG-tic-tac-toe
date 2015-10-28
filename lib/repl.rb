@@ -1,8 +1,8 @@
 #Repl is responsible for communicating with the user via the cli
 require 'colorize'
-
 class Repl
   def print(message)
+    sleep 0.5
     puts "\n" + message
   end
 
