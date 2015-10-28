@@ -10,6 +10,7 @@ class Game
     select: "Please select your spot.",
     game_over: "Game over",
     invalid_spot: "Please choose a valid empty spot.",
+    player1_choice: "Player 1 chose ",
     player2_choice: "Player 2 chose ",
     pick_players: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
     invalid_player_choice: "Please choose 1, 2 or 3"
@@ -54,9 +55,9 @@ class Game
       else
         spot1 = player1.choose_spot(board)
       end
-        repl.print("Player 1 chose " + spot1.to_s)
-        board[spot1] = player1.mark
-        repl.print_board(board)
+      repl.print(MESSAGES[:player1_choice] + spot1.to_s)
+      board[spot1] = player1.mark
+      repl.print_board(board)
 
       if !board.game_over? && !board.tie?
         if player2.human?
