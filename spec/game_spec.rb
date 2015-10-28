@@ -25,11 +25,11 @@ RSpec.describe "Game" do
     allow(game.repl).to receive(:print).and_return("")
     allow(game.repl).to receive(:print_board).and_return("")
     allow(game).to receive(:play).and_return(nil)
-    allow(game).to receive(:pick_players).and_return(nil)
+    allow(game).to receive(:game_type).and_return(nil)
 
     game.start_game
 
-    expect(game).to have_received(:pick_players)
+    expect(game).to have_received(:game_type)
   end
 
   it "allows users to choose human vs human game" do
@@ -37,7 +37,7 @@ RSpec.describe "Game" do
     allow(game.repl).to receive(:read).and_return("1")
     allow(game.repl).to receive(:print).and_return("")
 
-    game.pick_players
+    game.game_type
 
     expect(game.player1.human?).to be true
     expect(game.player2.human?).to be true
@@ -48,7 +48,7 @@ RSpec.describe "Game" do
     allow(game.repl).to receive(:read).and_return("2")
     allow(game.repl).to receive(:print).and_return("")
 
-    game.pick_players
+    game.game_type
 
     expect(game.player1.human?).to be false
     expect(game.player2.human?).to be false
@@ -59,7 +59,7 @@ RSpec.describe "Game" do
     allow(game.repl).to receive(:read).and_return("3")
     allow(game.repl).to receive(:print).and_return("")
 
-    game.pick_players
+    game.game_type
 
     expect(game.player1.human?).to be true
     expect(game.player2.human?).to be false
@@ -69,7 +69,8 @@ RSpec.describe "Game" do
     game = Game.new
     allow(game).to receive(:get_user_choice).and_return("4", "j", "3")
     allow(game.repl).to receive(:print).and_return("")
-    game.pick_players
+
+    game.game_type
 
     expect(game.repl).to have_received(:print).with("Please choose 1, 2 or 3").twice
   end
@@ -104,13 +105,13 @@ RSpec.describe "Game" do
       allow(game).to receive(:get_human_spot).and_return(4)
       allow(game).to receive(:sleep).and_return(nil)
       allow(game).to receive(:get_user_choice).and_return("3")
-      game.pick_players
+      game.game_type
       allow(game.player2).to receive(:choose_spot).and_return(3)
     end
 
     it "#start_game calls #play" do
       allow(game).to receive(:play).and_return(nil)
-      allow(game).to receive(:pick_players).and_return(nil)
+      allow(game).to receive(:game_type).and_return(nil)
 
       game.start_game
 

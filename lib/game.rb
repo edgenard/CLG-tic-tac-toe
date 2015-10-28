@@ -12,7 +12,7 @@ class Game
     invalid_spot: "Please choose a valid empty spot.",
     player1_choice: "Player 1 chose ",
     player2_choice: "Player 2 chose ",
-    pick_players: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
+    game_type: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
     invalid_player_choice: "Please choose 1, 2 or 3"
   }
 
@@ -23,15 +23,15 @@ class Game
 
   def start_game
     repl.print(MESSAGES[:welcome])
-    pick_players
+    game_type
 
     play
 
     repl.print(MESSAGES[:game_over])
   end
 
-  def pick_players
-    repl.print(MESSAGES[:pick_players])
+  def game_type
+    repl.print(MESSAGES[:game_type])
 
     user_choice = nil
     until user_choice do
