@@ -51,9 +51,7 @@ class Game
 
       repl.clear
       repl.print(MESSAGES[:player2_choice] + spot2.to_s)
-      sleep 1
       repl.print_board(board)
-      sleep 1
       repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
   end

@@ -39,7 +39,6 @@ RSpec.describe "Game" do
       allow(game).to receive(:get_human_spot).and_return(4)
       allow(game.player2).to receive(:choose_spot).and_return(3)
       allow(game).to receive(:sleep).and_return(nil)
-
     end
 
     it "#start_game calls #play" do
@@ -85,15 +84,5 @@ RSpec.describe "Game" do
 
       expect(game.repl).to have_received(:print).with("Player 2 chose 3")
     end
-
-    it "sleeps between turns" do
-      allow(game.board).to receive(:game_over?).and_return(false, false, false, true)
-
-      game.play
-
-      expect(game).to have_received(:sleep).twice
-    end
   end
-
-
 end
