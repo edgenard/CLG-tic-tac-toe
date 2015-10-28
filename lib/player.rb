@@ -35,7 +35,7 @@ class Player
     end
 
 
-    n = rand(0..available_spaces.count)
+    n = rand(0...available_spaces.count)
     return available_spaces[n].to_i
   end
 
