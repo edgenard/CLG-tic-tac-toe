@@ -37,7 +37,7 @@ class Game
 
     user_choice = nil
     until user_choice do
-      user_choice = repl.read
+      user_choice = get_user_choice
       if valid_choice?(user_choice, ["1", "2", "3"])
         setup_players(user_choice)
       else
@@ -45,7 +45,6 @@ class Game
         repl.print(MESSAGES[:invalid_player_choice])
       end
     end
-
   end
 
   def play
@@ -90,6 +89,11 @@ class Game
   end
 
   private
+
+  def get_user_choice
+    repl.read
+  end
+
   def setup_players(user_choice)
     case user_choice
     when "1"

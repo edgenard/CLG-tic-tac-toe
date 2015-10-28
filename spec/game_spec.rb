@@ -12,11 +12,10 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Board)
   end
 
-
   it "creates a new repl when initialized" do
     game = Game.new
 
-    result = game.instance_variable_get("@repl")
+    result = game.repl
 
     expect(result).to be_kind_of(Repl)
   end
@@ -70,13 +69,14 @@ RSpec.describe "Game" do
     let(:game){ Game.new}
 
     before(:each) do
-      game.player1 = Player.new("O", true)
-      game.player2 = Player.new("X")
       allow(game.repl).to receive(:print).and_return("")
       allow(game.repl).to receive(:clear).and_return(nil)
       allow(game).to receive(:get_human_spot).and_return(4)
-      allow(game.player2).to receive(:choose_spot).and_return(3)
       allow(game).to receive(:sleep).and_return(nil)
+      allow(game).to receive(:get_user_choice).and_return("3")
+      game.pick_players
+      allow(game.player2).to receive(:choose_spot).and_return(3)
+
     end
 
     it "#start_game calls #play" do
