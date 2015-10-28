@@ -12,6 +12,7 @@ class Repl
   end
 
   def clear
+    sleep 1
     system("clear")
   end
 

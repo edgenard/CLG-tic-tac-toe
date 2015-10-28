@@ -29,14 +29,14 @@ RSpec.describe "Repl" do
     expect(result).to eq(message)
   end
 
-  it "clears the console" do
-    repl = Repl.new
+  it "clears the console with 1 second delay" do
     system = double("system")
     allow(repl).to receive(:system)
 
     repl.clear
 
-    expect(repl).to have_received(:system)
+    expect(repl).to have_received(:sleep).with(1)
+    expect(repl).to have_received(:system).with("clear")
   end
 
   it "prints the board to stdout" do
@@ -48,7 +48,6 @@ RSpec.describe "Repl" do
   end
 
   it "colorizes X and O" do
-    repl = Repl.new
     o_mark = "O".colorize(:red)
     x_mark = "X".colorize(:green)
     board = ["0", "O", "2", "3", "X", "5", "6", "7", "8"]

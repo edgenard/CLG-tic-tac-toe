@@ -1,7 +1,6 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'repl'
-
 require 'byebug'
 class Game
   attr_reader :board, :player1, :player2, :repl
@@ -25,7 +24,6 @@ class Game
     repl.print(MESSAGES[:welcome])
     pick_players
     repl.print_board(board)
-    repl.print(MESSAGES[:select])
 
     play
 
@@ -49,26 +47,28 @@ class Game
 
   def play
     until board.game_over? || board.tie?
+      repl.clear
       if player1.human?
+        repl.print(MESSAGES[:select])
         spot1 = get_human_spot
       else
         spot1 = player1.choose_spot(board)
       end
+        repl.print("Player 1 chose " + spot1.to_s)
         board[spot1] = player1.mark
+        repl.print_board(board)
 
       if !board.game_over? && !board.tie?
         if player2.human?
+          repl.print(MESSAGES[:select])
           spot2 = get_human_spot
         else
           spot2 = player2.choose_spot(board)
         end
+        repl.print(MESSAGES[:player2_choice] + spot2.to_s)
         board[spot2] = player2.mark
+        repl.print_board(board)
       end
-
-      repl.clear
-      repl.print(MESSAGES[:player2_choice] + spot2.to_s)
-      repl.print_board(board)
-      repl.print(MESSAGES[:select]) if !board.game_over? && !board.tie?
     end
   end
 

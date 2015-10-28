@@ -70,6 +70,7 @@ RSpec.describe "Game" do
 
     before(:each) do
       allow(game.repl).to receive(:print).and_return("")
+      allow(game.repl).to receive(:print_board).and_return(nil)
       allow(game.repl).to receive(:clear).and_return(nil)
       allow(game).to receive(:get_human_spot).and_return(4)
       allow(game).to receive(:sleep).and_return(nil)
@@ -96,7 +97,7 @@ RSpec.describe "Game" do
     end
 
     it "stops playing if there is a tie" do
-      allow(game.board).to receive(:tie?).and_return(false, false,false, true)
+      allow(game.board).to receive(:tie?).and_return(false, false, true)
 
       game.play
 
@@ -105,7 +106,7 @@ RSpec.describe "Game" do
     end
 
 
-    it "clears the board for after each turn" do
+    it "clears the board for after each round" do
       allow(game.board).to receive(:game_over?).and_return(false, false,false, true)
       allow(game.repl).to receive(:clear)
 
@@ -114,11 +115,12 @@ RSpec.describe "Game" do
       expect(game.repl).to have_received(:clear).once
     end
 
-    it "notifies the user of computer choice" do
+    it "prints out each players choice" do
       allow(game.board).to receive(:game_over?).and_return(false, false,false, true)
 
       game.play
 
+      expect(game.repl).to have_received(:print).with("Player 1 chose 4")
       expect(game.repl).to have_received(:print).with("Player 2 chose 3")
     end
   end
