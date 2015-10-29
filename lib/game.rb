@@ -13,7 +13,8 @@ class Game
     player1_choice: "Player 1 chose ",
     player2_choice: "Player 2 chose ",
     game_type: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
-    invalid_player_choice: "Please choose 1, 2 or 3"
+    invalid_player_choice: "Please choose 1, 2 or 3",
+    choose_marker: "Please choose the marker for Player 1 \n Choose 1 for X \n Choose 2 for O"
   }
 
   def initialize
@@ -34,7 +35,7 @@ class Game
   end
 
   def choose_markers
-    repl.print("Please choose the marker for Player 1 \n Choose 1 for X \n Choose 2 for O")
+    repl.print(MESSAGES[:choose_marker])
 
     user_choice = nil
     until user_choice do
