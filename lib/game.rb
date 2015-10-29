@@ -9,12 +9,12 @@ class Game
     welcome: "Welcome to my Tic Tac Toe game",
     select: "Please select your spot.",
     game_over: "Game over",
-    invalid_spot: "Please choose a valid empty spot.",
     player1_choice: "Player 1 chose ",
     player2_choice: "Player 2 chose ",
-    game_type: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
     invalid_player_choice: "Please choose ",
-    choose_marker: "Please choose the marker for Player 1 \n Choose 1 for X \n Choose 2 for O"
+    game_type: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
+    choose_marker: "Please choose the marker for Player 1 \n Choose 1 for X. \n Choose 2 for O.",
+    choose_order:"Please choose which player goes first. \nChoose 1 for Player 1. \nChoose 2 for Player 2"
   }
 
   def initialize

@@ -20,18 +20,6 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
-  it "allows users to pick game type before starting" do
-    game = Game.new
-    allow(game.repl).to receive(:print).and_return("")
-    allow(game).to receive(:play).and_return(nil)
-    allow(game).to receive(:game_type).and_return(nil)
-    allow(game).to receive(:choose_markers).and_return(nil)
-
-    game.start_game
-
-    expect(game).to have_received(:game_type)
-  end
-
   it "allows users to choose human vs human game" do
     game = Game.new
     allow(game).to receive(:get_user_choice).and_return("1")
@@ -65,17 +53,6 @@ RSpec.describe "Game" do
     expect(game.player2.human).to be_falsey
   end
 
-  it "allows users to choose markers before starting" do
-    game = Game.new
-    allow(game.repl).to receive(:print).and_return("")
-    allow(game).to receive(:play).and_return(nil)
-    allow(game).to receive(:game_type).and_return(nil)
-    allow(game).to receive(:choose_markers).and_return(nil)
-
-    game.start_game
-
-    expect(game).to have_received(:choose_markers)
-  end
 
   it "allows user to choose X marker for player 1" do
     game = Game.new
