@@ -34,7 +34,7 @@ class Game
   end
 
   def choose_markers
-    repl.print("Please choose the marker for Player 1 \n Choose 1 for X. \n Choose 2 for O")
+    repl.print("Please choose the marker for Player 1 \n Choose 1 for X \n Choose 2 for O")
 
     user_choice = nil
     until user_choice do
@@ -43,7 +43,7 @@ class Game
         setup_markers(user_choice)
       else
         user_choice = nil
-        repl.print("Please choose 1 or 2.")
+        repl.print("Please choose 1 or 2")
       end
     end
 
@@ -128,7 +128,7 @@ class Game
       player2.mark = "O"
     end
   end
-  
+
   def valid_choice?(input, possible_choices)
     possible_choices.include?(input)
   end
