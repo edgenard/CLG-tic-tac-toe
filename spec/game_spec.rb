@@ -65,26 +65,6 @@ RSpec.describe "Game" do
     expect(game.player2.human).to be_falsey
   end
 
-  it "returns a valid human spot" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("4")
-
-    result = game.get_human_spot
-
-    expect(result).to eq(4)
-  end
-
-  it "keeps asking until human gives valid spot" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("9", "4")
-    allow(game.repl).to receive(:print).and_return(nil)
-
-    result = game.get_human_spot
-
-    expect(game).to have_received(:get_user_choice).twice
-    expect(game.repl).to have_received(:print).with("Please choose a valid empty spot.").once
-  end
-
   it "allows users to choose markers before starting" do
     game = Game.new
     allow(game.repl).to receive(:print).and_return("")
@@ -139,21 +119,10 @@ RSpec.describe "Game" do
       allow(game.repl).to receive(:print).and_return("")
       allow(game.repl).to receive(:print_board).and_return(nil)
       allow(game.repl).to receive(:clear).and_return(nil)
-      allow(game).to receive(:get_human_spot).and_return(4)
+      allow(game).to receive(:get_user_choice).and_return("4")
       allow(game).to receive(:sleep).and_return(nil)
-      allow(game).to receive(:get_user_choice).and_return("3")
-      game.game_type
-      allow(game).to receive(:choose_markers).and_return(nil)
+      game.player1.human = true
       allow(game.player2).to receive(:choose_spot).and_return(3)
-    end
-
-    it "#start_game calls #play" do
-      allow(game).to receive(:play).and_return(nil)
-      allow(game).to receive(:game_type).and_return(nil)
-
-      game.start_game
-
-      expect(game).to have_received(:play)
     end
 
 
@@ -162,7 +131,7 @@ RSpec.describe "Game" do
 
       game.play
 
-      expect(game).to have_received(:get_human_spot).once
+      expect(game).to have_received(:get_user_choice).once
       expect(game.player2).to have_received(:choose_spot).once
     end
 
@@ -171,7 +140,7 @@ RSpec.describe "Game" do
 
       game.play
 
-      expect(game).to have_received(:get_human_spot).once
+      expect(game).to have_received(:get_user_choice).once
       expect(game.player2).to have_received(:choose_spot).once
     end
 

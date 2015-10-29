@@ -13,7 +13,7 @@ class Game
     player1_choice: "Player 1 chose ",
     player2_choice: "Player 2 chose ",
     game_type: "Please choose the type of game you would like to play\nChoose 1 for Human vs Human. Choose 2 for Computer vs Computer. Choose 3 for Human vs Computer",
-    invalid_player_choice: "Please choose 1, 2 or 3",
+    invalid_player_choice: "Please choose ",
     choose_marker: "Please choose the marker for Player 1 \n Choose 1 for X \n Choose 2 for O"
   }
 
@@ -55,7 +55,6 @@ class Game
     when "3"
       player1.human = true
     end
-
   end
 
   def play
@@ -64,7 +63,7 @@ class Game
       repl.print_board(board)
       if player1.human
         repl.print(MESSAGES[:select])
-        spot1 = get_human_spot
+        spot1 = get_user_choice(board.available_spaces).to_i
       else
         spot1 = player1.choose_spot(board)
       end
@@ -75,7 +74,7 @@ class Game
       if !board.game_over? && !board.tie?
         if player2.human
           repl.print(MESSAGES[:select])
-          spot2 = get_human_spot
+          spot2 = get_user_choice(board.available_spaces).to_i
         else
           spot2 = player2.choose_spot(board)
         end
@@ -87,19 +86,6 @@ class Game
   end
 
 
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = get_user_choice
-      if valid_choice?(spot, board.available_spaces)
-        return spot.to_i
-      else
-        spot = nil
-        repl.print(MESSAGES[:invalid_spot])
-      end
-    end
-  end
-
   def get_user_choice(valid_choices)
     user_choice = nil
     until user_choice
@@ -109,7 +95,7 @@ class Game
       else
         user_choice = nil
         choices_string = valid_choices.join(", ").sub(/(.*)(,)/, "\\1 or")
-        repl.print("Please choose " + choices_string)
+        repl.print(MESSAGES[:invalid_player_choice] + choices_string)
       end
     end
 
