@@ -48,16 +48,13 @@ class Game
     repl.print(MESSAGES[:game_type])
 
     user_choice = get_user_choice(["1", "2", "3"])
-    setup_players(user_choice)
-    # until user_choice do
-    #   user_choice = get_user_choice
-    #   if valid_choice?(user_choice, ["1", "2", "3"])
-    #     setup_players(user_choice)
-    #   else
-    #     user_choice = nil
-    #     repl.print(MESSAGES[:invalid_player_choice])
-    #   end
-    # end
+    case user_choice
+    when "1"
+      player1.human = true
+      player2.human = true
+    when "3"
+      player1.human = true
+    end
 
   end
 
@@ -119,17 +116,6 @@ class Game
   end
 
   private
-  def setup_players(user_choice)
-    case user_choice
-    when "1"
-      player1.human = true
-      player2.human = true
-    when "3"
-      player1.human = true
-    end
-  end
-
-
 
   def valid_choice?(input, possible_choices)
     possible_choices.include?(input)
