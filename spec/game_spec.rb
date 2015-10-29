@@ -80,9 +80,8 @@ RSpec.describe "Game" do
   end
 
   describe "get user choice" do
-
+    let(:game) { Game.new }
     it "returns a valid user choice" do
-      game = Game.new
       allow(game.repl).to receive(:read).and_return("3")
 
       result = game.get_user_choice(["1", "2", "3"])
@@ -91,7 +90,6 @@ RSpec.describe "Game" do
     end
 
     it "keeps asking if user gives invalid input" do
-      game = Game.new
       allow(game.repl).to receive(:read).and_return("j", " 1", "3")
       allow(game.repl).to receive(:print).and_return("")
 
@@ -115,7 +113,6 @@ RSpec.describe "Game" do
       game.player1.human = true
       allow(game.player2).to receive(:choose_spot).and_return(3)
     end
-
 
     it "plays until someone wins" do
       allow(game.board).to receive(:game_over?).and_return(false, false,false, true)
@@ -146,7 +143,7 @@ RSpec.describe "Game" do
     end
 
     it "prints out each players choice" do
-      allow(game.board).to receive(:game_over?).and_return(false, false,false, true)
+      allow(game.board).to receive(:game_over?).and_return(false, false, false, true)
 
       game.play
 

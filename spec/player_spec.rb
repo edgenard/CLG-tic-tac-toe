@@ -1,52 +1,43 @@
 require 'rspec'
 require 'player'
 
-
 RSpec.describe "Player" do
+  let(:player) { Player.new("X") }
   it "has a mark" do
-    player = Player.new('X')
-
     result = player.mark
 
     expect(result).to eq('X')
   end
 
   it "mark can be changed" do
-    player = Player.new("X")
-
     player.mark = "O"
 
     expect(player.mark).to eq("O")
   end
 
   it "can be human" do
-    player = Player.new('X', true)
+    player.human = true
 
     result = player.human
 
-    expect(result).to be true
+    expect(result).to be_truthy
   end
 
   it "can be a computer" do
-    player = Player.new('X')
-
     result = player.human
 
-    expect(result).to be false
+    expect(result).to be_falsy
   end
 
   it "human attribute can be changed" do
-    player = Player.new("X")
-
     player.human = true
 
     expect(player.human).to be_truthy
   end
 
   describe "Computer Player" do
+    let(:board) { Board.new }
     it "chooses the middle of the board if it is open" do
-      player = Player.new('X')
-      board = Board.new
       board[1], board[5] = 'X', 'O'
 
       result = player.choose_spot(board)
@@ -55,8 +46,6 @@ RSpec.describe "Player" do
     end
 
     it "blocks other player from winning" do
-      player = Player.new('X')
-      board = Board.new
       board[0], board[1], board[4] = 'O', 'O', 'X'
 
       result = player.choose_spot(board)
@@ -65,8 +54,6 @@ RSpec.describe "Player" do
     end
 
     it "wins when it can" do
-      player = Player.new('X')
-      board = Board.new
       board[0], board[2], board[3] = 'O', 'O', 'O'
       board[1], board[4] = 'X', 'X'
 
