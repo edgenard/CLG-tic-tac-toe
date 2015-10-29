@@ -19,6 +19,8 @@ class Game
   def initialize
     @board = Board.new
     @repl = Repl.new
+    @player1 = Player.new("O")
+    @player2 = Player.new("X")
   end
 
   def start_game
@@ -96,14 +98,10 @@ class Game
   def setup_players(user_choice)
     case user_choice
     when "1"
-      @player1 = Player.new("O", true)
-      @player2 = Player.new("X", true)
-    when "2"
-      @player1 = Player.new("O")
-      @player2 = Player.new("X")
+      player1.human = true
+      player2.human = true  
     when "3"
-      @player1 = Player.new("O", true)
-      @player2 = Player.new("X")
+      player1.human = true
     end
   end
 

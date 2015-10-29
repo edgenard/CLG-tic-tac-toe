@@ -14,9 +14,6 @@ class Player
 
 
   private
-
-
-
   def get_best_move(board, mark, depth = 0, best_score = {})
     available_spaces = board.available_spaces
     return available_spaces.first.to_i if available_spaces.length < 2
@@ -41,7 +38,6 @@ class Player
   end
 
   def possible_move(spaces, board, mark)
-
     spaces.each do |space|
       board[space.to_i] = mark
       if board.game_over?
