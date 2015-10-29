@@ -34,7 +34,7 @@ RSpec.describe "Game" do
 
   it "allows users to choose human vs human game" do
     game = Game.new
-    allow(game.repl).to receive(:read).and_return("1")
+    allow(game).to receive(:get_user_choice).and_return("1")
     allow(game.repl).to receive(:print).and_return("")
 
     game.game_type
@@ -45,7 +45,7 @@ RSpec.describe "Game" do
 
   it "allows users to choose a computer vs computer game" do
     game = Game.new
-    allow(game.repl).to receive(:read).and_return("2")
+    allow(game).to receive(:get_user_choice).and_return("2")
     allow(game.repl).to receive(:print).and_return("")
 
     game.game_type
@@ -56,7 +56,7 @@ RSpec.describe "Game" do
 
   it "allows users to choose a human vs computer game" do
     game = Game.new
-    allow(game.repl).to receive(:read).and_return("3")
+    allow(game).to receive(:get_user_choice).and_return("3")
     allow(game.repl).to receive(:print).and_return("")
 
     game.game_type
