@@ -1,3 +1,3 @@
-Readme
-
-Run the game in lib/game.rb
+# Readme
+=================================
+Run the game with `ruby lib/game.rb`
