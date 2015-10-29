@@ -118,15 +118,6 @@ RSpec.describe "Game" do
     expect(game.player2.mark).to eq("O")
   end
 
-  it"keeps asking player to choose marker if given invalid input" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("3", " 1", "2" )
-    allow(game.repl).to receive(:print).and_return("")
-
-    game.choose_markers
-
-    expect(game.repl).to have_received(:print).with("Please choose 1 or 2").twice
-  end
 
   describe "get user choice" do
 

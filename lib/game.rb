@@ -37,16 +37,17 @@ class Game
   def choose_markers
     repl.print(MESSAGES[:choose_marker])
 
+    setup_markers(get_user_choice(["1", "2"]))
     user_choice = nil
-    until user_choice do
-      user_choice = get_user_choice
-      if valid_choice?(user_choice, ["1", "2"])
-        setup_markers(user_choice)
-      else
-        user_choice = nil
-        repl.print("Please choose 1 or 2")
-      end
-    end
+    # until user_choice do
+    #   user_choice = get_user_choice
+    #   if valid_choice?(user_choice, ["1", "2"])
+    #     setup_markers(user_choice)
+    #   else
+    #     user_choice = nil
+    #     repl.print("Please choose 1 or 2")
+    #   end
+    # end
 
   end
 
