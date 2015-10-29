@@ -20,12 +20,12 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
-  it "allows users to pick players before starting to play" do
+  it "allows users to pick game type before starting" do
     game = Game.new
     allow(game.repl).to receive(:print).and_return("")
-    allow(game.repl).to receive(:print_board).and_return("")
     allow(game).to receive(:play).and_return(nil)
     allow(game).to receive(:game_type).and_return(nil)
+    allow(game).to receive(:choose_markers).and_return(nil)
 
     game.start_game
 
@@ -95,6 +95,29 @@ RSpec.describe "Game" do
     expect(game.repl).to have_received(:print).with("Please choose a valid empty spot.").once
   end
 
+  it "allows users to choose markers before starting" do
+    game = Game.new
+    allow(game.repl).to receive(:print).and_return("")
+    allow(game).to receive(:play).and_return(nil)
+    allow(game).to receive(:game_type).and_return(nil)
+    allow(game).to receive(:choose_markers).and_return(nil)
+
+    game.start_game
+
+    expect(game).to have_received(:choose_markers)
+  end
+
+  it "allows user to choose X marker for player 1" do
+    game = Game.new
+    allow(game).to receive(:get_user_choice).and_return("1")
+    allow(game.repl).to receive(:print).and_return("")
+
+    game.choose_markers
+
+    expect(game.player1.mark).to eq("X")
+    expect(game.player2.mark).to eq("O")
+  end
+
   describe "game play" do
     let(:game){ Game.new}
 
@@ -106,6 +129,7 @@ RSpec.describe "Game" do
       allow(game).to receive(:sleep).and_return(nil)
       allow(game).to receive(:get_user_choice).and_return("3")
       game.game_type
+      allow(game).to receive(:choose_markers).and_return(nil)
       allow(game.player2).to receive(:choose_spot).and_return(3)
     end
 

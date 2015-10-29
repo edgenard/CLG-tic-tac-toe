@@ -26,10 +26,27 @@ class Game
   def start_game
     repl.print(MESSAGES[:welcome])
     game_type
+    choose_markers
 
     play
 
     repl.print(MESSAGES[:game_over])
+  end
+
+  def choose_markers
+    repl.print("Please choose the marker for Player 1 \n Choose 1 for X. \n Choose 2 for O")
+
+    user_choice = nil
+    until user_choice do
+      user_choice = get_user_choice
+      if valid_choice?(user_choice, ["1", "2"])
+        setup_markers(user_choice)
+      else
+        user_choice = nil
+        repl.print("Please choose 1 or 2.")
+      end
+    end
+
   end
 
   def game_type
@@ -99,12 +116,19 @@ class Game
     case user_choice
     when "1"
       player1.human = true
-      player2.human = true  
+      player2.human = true
     when "3"
       player1.human = true
     end
   end
 
+  def setup_markers(user_choice)
+    if user_choice == "1"
+      player1.mark = "X"
+      player2.mark = "O"
+    end
+  end
+  
   def valid_choice?(input, possible_choices)
     possible_choices.include?(input)
   end
