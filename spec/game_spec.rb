@@ -55,12 +55,6 @@ RSpec.describe "Game" do
   end
 
 
-
-
-
-
-
-
   it "allows user to choose X marker for player 1" do
     game = Game.new
     allow(game).to receive(:get_user_choice).and_return("1")
@@ -70,6 +64,19 @@ RSpec.describe "Game" do
 
     expect(game.player1.mark).to eq("X")
     expect(game.player2.mark).to eq("O")
+  end
+
+  it "allows user to decide who goes first" do
+    game = Game.new
+    allow(game).to receive(:get_user_choice).and_return("2")
+    allow(game.repl).to receive(:print).and_return("")
+    game.player1.mark = "X"
+    game.player2.mark = "O"
+
+    game.choose_order
+
+    expect(game.player1.mark).to eq("O")
+    expect(game.player2.mark).to eq("X")
   end
 
   describe "get user choice" do

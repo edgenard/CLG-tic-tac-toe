@@ -28,6 +28,7 @@ class Game
     repl.print(MESSAGES[:welcome])
     game_type
     choose_markers
+    choose_order
 
     play
 
@@ -41,6 +42,9 @@ class Game
     if user_choice == "1"
       player1.mark = "X"
       player2.mark = "O"
+    else
+      player1.mark = "O"
+      player2.mark = "X"
     end
   end
 
@@ -54,6 +58,16 @@ class Game
       player2.human = true
     when "3"
       player1.human = true
+    end
+  end
+
+  def choose_order
+    repl.print(MESSAGES[:choose_order])
+
+    user_choice = get_user_choice(["1", "2"])
+
+    if user_choice == "2"
+      @player1, @player2 = @player2, @player1
     end
   end
 
