@@ -20,38 +20,45 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(Repl)
   end
 
-  it "allows users to choose human vs human game" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("1")
-    allow(game.repl).to receive(:print).and_return("")
+  describe "game type" do
+    let(:game) { Game.new }
+    before(:each) do
+      allow(game.repl).to receive(:print).and_return("")
+    end
 
-    game.game_type
+    it "allows users to choose human vs human game" do
+      allow(game).to receive(:get_user_choice).and_return("1")
 
-    expect(game.player1.human).to be_truthy
-    expect(game.player2.human).to be_truthy
+      game.game_type
+
+      expect(game.player1.human).to be_truthy
+      expect(game.player2.human).to be_truthy
+    end
+
+    it "allows users to choose a computer vs computer game" do
+      allow(game).to receive(:get_user_choice).and_return("2")
+
+      game.game_type
+
+      expect(game.player1.human).to be_falsey
+      expect(game.player2.human).to be_falsey
+    end
+
+    it "allows users to choose a human vs computer game" do
+      allow(game).to receive(:get_user_choice).and_return("3")
+
+      game.game_type
+
+      expect(game.player1.human).to be_truthy
+      expect(game.player2.human).to be_falsey
+    end
   end
 
-  it "allows users to choose a computer vs computer game" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("2")
-    allow(game.repl).to receive(:print).and_return("")
 
-    game.game_type
 
-    expect(game.player1.human).to be_falsey
-    expect(game.player2.human).to be_falsey
-  end
 
-  it "allows users to choose a human vs computer game" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("3")
-    allow(game.repl).to receive(:print).and_return("")
 
-    game.game_type
 
-    expect(game.player1.human).to be_truthy
-    expect(game.player2.human).to be_falsey
-  end
 
 
   it "allows user to choose X marker for player 1" do
