@@ -37,33 +37,28 @@ class Game
   def choose_markers
     repl.print(MESSAGES[:choose_marker])
 
-    setup_markers(get_user_choice(["1", "2"]))
-    user_choice = nil
-    # until user_choice do
-    #   user_choice = get_user_choice
-    #   if valid_choice?(user_choice, ["1", "2"])
-    #     setup_markers(user_choice)
-    #   else
-    #     user_choice = nil
-    #     repl.print("Please choose 1 or 2")
-    #   end
-    # end
-
+    user_choice = get_user_choice(["1", "2"])
+    if user_choice == "1"
+      player1.mark = "X"
+      player2.mark = "O"
+    end
   end
 
   def game_type
     repl.print(MESSAGES[:game_type])
 
-    user_choice = nil
-    until user_choice do
-      user_choice = get_user_choice
-      if valid_choice?(user_choice, ["1", "2", "3"])
-        setup_players(user_choice)
-      else
-        user_choice = nil
-        repl.print(MESSAGES[:invalid_player_choice])
-      end
-    end
+    user_choice = get_user_choice(["1", "2", "3"])
+    setup_players(user_choice)
+    # until user_choice do
+    #   user_choice = get_user_choice
+    #   if valid_choice?(user_choice, ["1", "2", "3"])
+    #     setup_players(user_choice)
+    #   else
+    #     user_choice = nil
+    #     repl.print(MESSAGES[:invalid_player_choice])
+    #   end
+    # end
+
   end
 
   def play
@@ -134,12 +129,7 @@ class Game
     end
   end
 
-  def setup_markers(user_choice)
-    if user_choice == "1"
-      player1.mark = "X"
-      player2.mark = "O"
-    end
-  end
+
 
   def valid_choice?(input, possible_choices)
     possible_choices.include?(input)

@@ -65,16 +65,6 @@ RSpec.describe "Game" do
     expect(game.player2.human).to be_falsey
   end
 
-  it "keeps asking until user gives valid game type" do
-    game = Game.new
-    allow(game).to receive(:get_user_choice).and_return("4", "j", "3")
-    allow(game.repl).to receive(:print).and_return("")
-
-    game.game_type
-
-    expect(game.repl).to have_received(:print).with("Please choose 1, 2 or 3").twice
-  end
-
   it "returns a valid human spot" do
     game = Game.new
     allow(game).to receive(:get_user_choice).and_return("4")
@@ -117,7 +107,6 @@ RSpec.describe "Game" do
     expect(game.player1.mark).to eq("X")
     expect(game.player2.mark).to eq("O")
   end
-
 
   describe "get user choice" do
 
