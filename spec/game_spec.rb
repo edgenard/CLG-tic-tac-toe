@@ -128,6 +128,30 @@ RSpec.describe "Game" do
     expect(game.repl).to have_received(:print).with("Please choose 1 or 2").twice
   end
 
+  describe "get user choice" do
+
+    it "returns a valid user choice" do
+      game = Game.new
+      allow(game.repl).to receive(:read).and_return("3")
+
+      result = game.get_user_choice(["1", "2", "3"])
+
+      expect(result).to eq("3")
+    end
+
+    it "keeps asking if user gives invalid input" do
+      game = Game.new
+      allow(game.repl).to receive(:read).and_return("j", " 1", "3")
+      allow(game.repl).to receive(:print).and_return("")
+
+      result = game.get_user_choice(["1", "2","3"])
+
+      expect(result).to eq("3")
+      expect(game.repl).to have_received(:print).with("Please choose 1, 2 or 3").twice
+    end
+
+  end
+
   describe "game play" do
     let(:game){ Game.new}
 

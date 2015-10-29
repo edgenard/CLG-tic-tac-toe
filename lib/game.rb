@@ -107,12 +107,22 @@ class Game
     end
   end
 
-  private
+  def get_user_choice(valid_choices)
+    user_choice = nil
+    until user_choice
+      user_choice = repl.read
+      if valid_choice?(user_choice, valid_choices)
+        return user_choice
+      else
+        user_choice = nil
+        choices_string = valid_choices.join(", ").sub(/(.*)(,)/, "\\1 or")
+        repl.print("Please choose " + choices_string)
+      end
+    end
 
-  def get_user_choice
-    repl.read
   end
 
+  private
   def setup_players(user_choice)
     case user_choice
     when "1"
