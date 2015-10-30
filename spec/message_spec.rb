@@ -62,17 +62,26 @@ RSpec.describe "Message" do
   end
 
   it "colors X green, O red" do
+    test_string = "X and O"
+    x_mark = "X".colorize(:green)
+    o_mark = "O".colorize(:red)
+    colorized_message = "#{x_mark} and #{o_mark}"
+
+    result = message.colorize_markers(test_string)
+
+    expect(result).to eq(colorized_message)
+  end
+
+  it "returns a colorized board" do
     board = ["X", "O", "2", "3", "4", "5", "6", "7", "8"]
     x_mark = "X".colorize(:green)
     o_mark = "O".colorize(:red)
-    formatted_board = message.format_board(board)
     colorized_board = "|_#{x_mark}_|_#{o_mark}_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n"
 
-    result = message.colorize_markers(formatted_board)
+    result = message.colorize_board(board)
 
     expect(result).to eq(colorized_board)
   end
-
 
 
 end

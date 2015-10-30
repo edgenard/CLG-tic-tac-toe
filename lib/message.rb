@@ -44,4 +44,8 @@ class Message
     o_mark = "O".colorize(:red)
     message.gsub(/[XO]/, "X" => x_mark, "O" => o_mark )
   end
+
+  def colorize_board(board)
+    colorize_markers(format_board(board))
+  end
 end
