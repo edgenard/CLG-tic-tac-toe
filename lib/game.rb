@@ -1,6 +1,7 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'repl'
+require_relative 'message'
 require 'byebug'
 class Game
   attr_reader :board, :player1, :player2, :repl, :message
@@ -26,7 +27,7 @@ class Game
   end
 
   def choose_markers
-    repl.print(message.game_over)
+    repl.print(message.choose_marker)
 
     user_choice = get_user_choice(["1", "2"])
     if user_choice == "1"
