@@ -5,9 +5,6 @@ class Board
     @state = build_board(size)
   end
 
-  def [](idx)
-    @state[idx]
-  end
 
   def []=(idx, value)
     @state[idx] = value
