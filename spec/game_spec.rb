@@ -115,12 +115,8 @@ RSpec.describe "Game" do
   describe "game play" do
     before(:each) do
       allow(game.input_output).to receive(:print).and_return("")
-      allow(game.input_output).to receive(:print_board).and_return(nil)
       allow(game.input_output).to receive(:clear).and_return(nil)
-      allow(game).to receive(:get_user_choice).and_return("4")
-      allow(game).to receive(:sleep).and_return(nil)
-      game.player1.human = true
-      allow(game.player2).to receive(:choose_spot).and_return(3)
+      allow(game).to receive(:get_player_spot).and_return(4, 3)
     end
 
     it "plays until someone wins" do
@@ -128,8 +124,7 @@ RSpec.describe "Game" do
 
       game.play
 
-      expect(game).to have_received(:get_user_choice).once
-      expect(game.player2).to have_received(:choose_spot).once
+      expect(game).to have_received(:get_player_spot).twice
     end
 
     it "stops playing if there is a tie" do
@@ -137,8 +132,7 @@ RSpec.describe "Game" do
 
       game.play
 
-      expect(game).to have_received(:get_user_choice).once
-      expect(game.player2).to have_received(:choose_spot).once
+      expect(game).to have_received(:get_player_spot).twice
     end
 
 
