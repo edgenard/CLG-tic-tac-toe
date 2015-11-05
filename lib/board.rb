@@ -28,11 +28,9 @@ class Board
   private
 
   def build_board(size)
-    grid = Array.new(size) { Array.new(size) }
-    spot = 0
-    grid.map do |row|
-      row.map {|space| spot = spot + 1; spot}
-    end
+    state = []
+    (size*size).times { |idx| state << idx.to_s}
+    state
   end
 
   def check_rows?
