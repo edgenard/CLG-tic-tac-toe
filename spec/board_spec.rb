@@ -3,28 +3,45 @@ require 'board'
 
 
 RSpec.describe "Board" do
-  let(:board) { Board.new }
-
-
   it "creates a default 3x3 board" do
+    board = Board.new
     result = board.state
 
-    expect(result).to match(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+    expect(result).to match(%w[0 1 2 3 4 5 6 7 8])
+  end
+
+  it "creates a 4x4 board" do
+    board = Board.new(4)
+
+    result = board.state
+
+    expect(result).to match(%w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15])
+  end
+
+  it "creates a 5x5 board" do
+    board = Board.new(5)
+
+    result = board.state
+
+    expect(result).to match(%w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24])
   end
 
   it "returns the value of spot on the board" do
+    board = Board.new
     result = board[1]
 
     expect(result).to eq("1")
   end
 
   it "sets the value at the given index" do
+    board = Board.new
     board[1] = "O"
 
     expect(board[1]).to eq("O")
   end
 
   describe "3x3 board" do
+    let (:board) { Board.new }
     it "game is over if the top row is all O" do
       board[0], board[1], board[2] = "O", "O", "O"
 
