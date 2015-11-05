@@ -23,7 +23,7 @@ RSpec.describe "Message" do
   end
 
   it "has a player choice message" do
-    result = message.player_choice("1", "4")
+    result = message.player_choice(player:"1", choice:"4")
 
     expect(result).to eq("Player 1 chose 4")
   end

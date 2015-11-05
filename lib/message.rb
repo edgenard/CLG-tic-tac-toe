@@ -14,7 +14,7 @@ class Message
     "Game over."
   end
 
-  def player_choice(player, choice)
+  def player_choice(player:, choice:)
     "Player #{player} chose #{choice}"
   end
 

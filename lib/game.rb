@@ -66,13 +66,13 @@ class Game
       input_output.clear
       input_output.print(message.colorize_board(board))
       spot1 = get_player_spot(player1)
-      input_output.print(message.player_choice("1", spot1))
+      input_output.print(message.player_choice(player:"1", choice:spot1))
       board[spot1] = player1.mark
       input_output.print(message.colorize_board(board))
 
       if !board.game_over? && !board.tie?
         spot2 = get_player_spot(player2)
-        input_output.print(message.player_choice("2", spot2))
+        input_output.print(message.player_choice(player:"2", choice:spot2))
         board[spot2] = player2.mark
         input_output.print(message.colorize_board(board))
       end
