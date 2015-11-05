@@ -12,6 +12,12 @@ RSpec.describe "Board" do
     expect(result).to match([[1, 2, 3], [4, 5, 6], [7, 8,9]])
   end
 
+  it "returns the value of spot on the board" do
+    result = board[1]
+
+    expect(result).to eq(1)
+  end
+
   it "sets the value at the given index" do
     board[1] = "O"
 
