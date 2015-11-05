@@ -61,5 +61,17 @@ RSpec.describe "Player" do
 
       expect(result).to eq(7)
     end
+
+    it "immediately choooses the only empty spot left" do
+      board[0], board[1], board[2] = "X", "O", "X"
+      board[3], board[4], board[5] = "O", "O", "X"
+      board[6], board[7] = "O", "X"
+      allow(player).to receive(:possible_move)
+
+      result = player.choose_spot(board)
+
+      expect(result).to eq(8)
+      expect(player).not_to have_received(:possible_move)
+    end
   end
 end
