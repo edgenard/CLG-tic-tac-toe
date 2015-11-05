@@ -92,6 +92,26 @@ RSpec.describe "Game" do
     end
   end
 
+  it "#get_player_spot returns a computer players choice" do
+    game.player1.human = false
+    allow(game.player1).to receive(:choose_spot).and_return(4)
+
+    result = game.get_player_spot(game.player1)
+
+    expect(game.player1).to have_received(:choose_spot)
+    expect(result).to eq(4)
+  end
+
+  it "returns a human players choice" do
+    game.player1.human = true
+    allow(game).to receive(:get_user_choice).and_return("4")
+
+    result = game.get_player_spot(game.player1)
+
+    expect(game).to have_received(:get_user_choice)
+    expect(result).to eq(4)
+  end
+
   describe "game play" do
     before(:each) do
       allow(game.input_output).to receive(:print).and_return("")

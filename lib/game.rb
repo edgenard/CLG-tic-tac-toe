@@ -2,7 +2,6 @@ require_relative 'board'
 require_relative 'player'
 require_relative 'input_output'
 require_relative 'message'
-require 'byebug'
 class Game
   attr_reader :board, :player1, :player2, :input_output, :message
 
@@ -66,28 +65,27 @@ class Game
     until board.game_over? || board.tie?
       input_output.clear
       input_output.print(message.colorize_board(board))
-      if player1.human
-        input_output.print(message.select_spot)
-        spot1 = get_user_choice(board.available_spaces).to_i
-      else
-        spot1 = player1.choose_spot(board)
-      end
+      spot1 = get_player_spot(player1)
       input_output.print(message.player_choice("1", spot1))
       board[spot1] = player1.mark
       input_output.print(message.colorize_board(board))
 
       if !board.game_over? && !board.tie?
-        if player2.human
-          input_output.print(message.select_spot)
-          spot2 = get_user_choice(board.available_spaces).to_i
-        else
-          spot2 = player2.choose_spot(board)
-        end
+        spot2 = get_player_spot(player2)
         input_output.print(message.player_choice("2", spot2))
         board[spot2] = player2.mark
         input_output.print(message.colorize_board(board))
       end
     end
+  end
+
+  def get_player_spot(player)
+    if player.human
+      spot = get_user_choice(board.available_spaces).to_i
+    else
+      spot = player.choose_spot(board)
+    end
+    spot
   end
 
 
