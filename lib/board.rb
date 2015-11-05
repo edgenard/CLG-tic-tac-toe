@@ -1,8 +1,8 @@
 #Board is responsible for the current state of the board.
 class Board
   attr_reader :state
-  def initialize
-    @state = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+  def initialize(size=3)
+    @state = build_board(size)
   end
 
   def [](idx)
@@ -26,6 +26,14 @@ class Board
   end
 
   private
+
+  def build_board(size)
+    grid = Array.new(size) { Array.new(size) }
+    spot = 0
+    grid.map do |row|
+      row.map {|space| spot = spot + 1; spot}
+    end
+  end
 
   def check_rows?
     [state[0], state[1], state[2]].uniq.length == 1 ||

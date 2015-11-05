@@ -4,16 +4,18 @@ require 'board'
 
 RSpec.describe "Board" do
   let(:board) { Board.new }
-  it "creates the game board as an array" do
+
+
+  it "creates a default 3x3 board" do
     result = board.state
 
-    expect(result).to match(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+    expect(result).to match([[1, 2, 3], [4, 5, 6], [7, 8,9]])
   end
 
   it "returns the value of spot on the board" do
-    result = board[0]
+    result = board[1]
 
-    expect(result).to eq("0")
+    expect(result).to eq(1)
   end
 
   it "sets the value at the given index" do
