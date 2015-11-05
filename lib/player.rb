@@ -8,12 +8,16 @@ class Player
 
 
   def choose_spot(board)
-    return 4 if board[4] == '4'
-    get_best_move(board, mark)
+    center_spot(board) || get_best_move(board, mark)
   end
 
 
   private
+  def center_spot(board)
+    return 4 if board[4] == "4"
+    false
+  end
+  
   def get_best_move(board, mark, depth = 0, best_score = {})
     available_spaces = board.available_spaces
     return available_spaces.first.to_i if available_spaces.length < 2
