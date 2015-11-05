@@ -9,8 +9,8 @@ class Game
   def initialize
     @board = Board.new
     @input_output = InputOutput.new
-    @player1 = Player.new("O")
-    @player2 = Player.new("X")
+    @player1 = Player.new(mark:"O")
+    @player2 = Player.new(mark:"X")
     @message = Message.new
   end
 

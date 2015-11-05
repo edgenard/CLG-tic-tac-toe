@@ -1,7 +1,7 @@
 #Player is responsible for players attributes and actions
 class Player
   attr_accessor :mark, :human
-  def initialize(mark=nil, human=false)
+  def initialize(mark:, human: false)
     @mark = mark
     @human = human
   end

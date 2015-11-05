@@ -2,7 +2,7 @@ require 'rspec'
 require 'player'
 
 RSpec.describe "Player" do
-  let(:player) { Player.new("X") }
+  let(:player) { Player.new(mark: "X") }
   it "has a mark" do
     result = player.mark
 
