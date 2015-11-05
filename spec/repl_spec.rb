@@ -38,6 +38,4 @@ RSpec.describe "InputOutput" do
     expect(input_output).to have_received(:sleep).with(1)
     expect(input_output).to have_received(:system).with("clear")
   end
-
-
  end

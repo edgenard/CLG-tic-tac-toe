@@ -3,25 +3,20 @@ require 'game'
 require 'byebug'
 
 RSpec.describe "Game" do
-
+  let(:game) { Game.new }
   it "creates a new board when initialized" do
-    game = Game.new
-
     result = game.board
 
     expect(result).to be_kind_of(Board)
   end
 
   it "creates a new input_output when initialized" do
-    game = Game.new
-
     result = game.input_output
 
     expect(result).to be_kind_of(InputOutput)
   end
 
   describe "game type" do
-    let(:game) { Game.new }
     before(:each) do
       allow(game.input_output).to receive(:print).and_return("")
     end
@@ -56,7 +51,6 @@ RSpec.describe "Game" do
 
 
   it "allows user to choose X marker for player 1" do
-    game = Game.new
     allow(game).to receive(:get_user_choice).and_return("1")
     allow(game.input_output).to receive(:print).and_return("")
 
@@ -67,7 +61,6 @@ RSpec.describe "Game" do
   end
 
   it "allows user to decide who goes first" do
-    game = Game.new
     allow(game).to receive(:get_user_choice).and_return("2")
     allow(game.input_output).to receive(:print).and_return("")
     game.player1.mark = "X"
@@ -80,7 +73,6 @@ RSpec.describe "Game" do
   end
 
   describe "get user choice" do
-    let(:game) { Game.new }
     it "returns a valid user choice" do
       allow(game.input_output).to receive(:read).and_return("3")
 
@@ -98,12 +90,9 @@ RSpec.describe "Game" do
       expect(result).to eq("3")
       expect(game.input_output).to have_received(:print).with("Please choose 1, 2 or 3").twice
     end
-
   end
 
   describe "game play" do
-    let(:game){ Game.new}
-
     before(:each) do
       allow(game.input_output).to receive(:print).and_return("")
       allow(game.input_output).to receive(:print_board).and_return(nil)
