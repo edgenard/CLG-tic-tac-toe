@@ -1,42 +1,42 @@
 require 'rspec'
-require 'repl'
+require 'input_output'
 
-RSpec.describe "Repl" do
-  let(:repl) {  Repl.new}
+RSpec.describe "InputOutput" do
+  let(:input_output) {  InputOutput.new}
   before(:each) do
-    allow(repl).to receive(:sleep).and_return(nil)
+    allow(input_output).to receive(:sleep).and_return(nil)
   end
   it "prints to stdout" do
     message = "Hello"
 
-    expect{repl.print(message)}.to output("\n" + message + "\n").to_stdout
+    expect{input_output.print(message)}.to output("\n" + message + "\n").to_stdout
   end
 
   it "slows down the printing of messages" do
-    allow(repl).to receive(:puts).and_return(nil)
+    allow(input_output).to receive(:puts).and_return(nil)
 
-    repl.print("Hello")
+    input_output.print("Hello")
 
-    expect(repl).to have_received(:sleep)
+    expect(input_output).to have_received(:sleep)
   end
 
   it "reads from stdin" do
     message = "Hello"
-    allow(repl).to receive(:gets).and_return(message)
+    allow(input_output).to receive(:gets).and_return(message)
 
-    result = repl.read
+    result = input_output.read
 
     expect(result).to eq(message)
   end
 
   it "clears the console with 1 second delay" do
     system = double("system")
-    allow(repl).to receive(:system)
+    allow(input_output).to receive(:system)
 
-    repl.clear
+    input_output.clear
 
-    expect(repl).to have_received(:sleep).with(1)
-    expect(repl).to have_received(:system).with("clear")
+    expect(input_output).to have_received(:sleep).with(1)
+    expect(input_output).to have_received(:system).with("clear")
   end
 
 
