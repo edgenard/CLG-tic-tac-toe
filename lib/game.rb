@@ -62,6 +62,7 @@ class Game
   end
 
   def choose_board_size
+    input_output.print(message.choose_board_size)
     user_choice = get_user_choice(["1", "2", "3"])
     case user_choice
     when "2"
