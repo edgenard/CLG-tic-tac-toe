@@ -35,6 +35,10 @@ class Message
     "Please choose which player goes first. \nChoose 1 for Player 1. \nChoose 2 for Player 2"
   end
 
+  def choose_board_size
+    "Please choose the size of the board you'd like to play on.\n Choose 1 for 3x3 board.\n Choose 2 for 4x4 board.\n Choose 3 for 5x5 board"
+  end
+
   def format_board(board)
     "|_#{board[0]}_|_#{board[1]}_|_#{board[2]}_|\n|_#{board[3]}_|_#{board[4]}_|_#{board[5]}_|\n|_#{board[6]}_|_#{board[7]}_|_#{board[8]}_|\n"
   end

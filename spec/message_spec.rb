@@ -52,6 +52,13 @@ RSpec.describe "Message" do
     expect(result).to eq("Please choose which player goes first. \nChoose 1 for Player 1. \nChoose 2 for Player 2")
   end
 
+  it "has a message to choose board size" do
+    result = message.choose_board_size
+
+    expect(result).to eq("Please choose the size of the board you'd like to play on.\n Choose 1 for 3x3 board.\n Choose 2 for 4x4 board.\n Choose 3 for 5x5 board")
+  end
+
+
   it "has a format board message" do
     board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     formatted_board = "|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n"
