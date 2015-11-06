@@ -26,18 +26,6 @@ class Board
     state.select {|space| space.to_i.to_s == space}
   end
 
-  private
-
-  def build_board(size)
-    state = []
-    (size*size).times { |idx| state << idx.to_s}
-    state
-  end
-
-  def check_rows?
-    rows.any? { |row| row.uniq.length == 1  }
-  end
-
   def rows
     rows = []
     row = []
@@ -55,9 +43,47 @@ class Board
     rows
   end
 
+
   def columns
     rows.transpose
   end
+
+  def diagonals
+    diagonals = []
+
+    left_diagonal = []
+    idx = 0
+    @size.times do
+      left_diagonal << state[idx]
+      idx = idx + @size + 1
+    end
+    diagonals << left_diagonal
+
+    right_diagonal = []
+    idx = @size - 1
+    @size.times do
+     right_diagonal << state[idx]
+     idx = idx + @size - 1
+    end
+    diagonals << right_diagonal
+
+    diagonals
+  end
+
+  private
+
+  def build_board(size)
+    state = []
+    (size*size).times { |idx| state << idx.to_s}
+    state
+  end
+
+  def check_rows?
+    rows.any? { |row| row.uniq.length == 1  }
+  end
+
+
+
 
   def check_columns?
     columns.any? {|col| col.uniq.length == 1}
@@ -67,23 +93,6 @@ class Board
     diagonals.any? {|diag| diag.uniq.length == 1}
   end
 
-  def diagonals
-    diagonals = []
-    left_diagonal = []
-    idx = 0
-    @size.times do
-      left_diagonal << state[idx]
-      idx = idx + @size + 1
-    end
-    diagonals << left_diagonal
-    right_diagonal = []
-    idx = @size - 1
-    @size.times do
-     right_diagonal << state[idx]
-     idx = idx + @size - 1
-    end
-    diagonals << right_diagonal
-    diagonals
-  end
+
 
 end
