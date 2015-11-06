@@ -19,6 +19,7 @@ class Game
     game_type
     choose_markers
     choose_order
+    choose_board_size
 
     play
 

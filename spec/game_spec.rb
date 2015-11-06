@@ -16,6 +16,26 @@ RSpec.describe "Game" do
     expect(result).to be_kind_of(InputOutput)
   end
 
+  describe "#start_game" do
+
+    it "calls the methods that setup the game" do
+      allow(game.input_output).to receive(:print).and_return(nil)
+      allow(game).to receive(:game_type).and_return(nil)
+      allow(game).to receive(:choose_markers).and_return(nil)
+      allow(game).to receive(:choose_order).and_return(nil)
+      allow(game).to receive(:choose_board_size).and_return(nil)
+      allow(game).to receive(:play).and_return(nil)
+
+      game.start_game
+
+      expect(game).to have_received(:game_type)
+      expect(game).to have_received(:choose_markers)
+      expect(game).to have_received(:choose_order)
+      expect(game).to have_received(:choose_board_size)
+      expect(game).to have_received(:play)
+    end
+  end
+
   describe "game type" do
     before(:each) do
       allow(game.input_output).to receive(:print).and_return("")
