@@ -14,10 +14,12 @@ class Player
 
   private
   def center_spot(board)
-    return 4 if board[4] == "4"
+    center_idx = board.size/2
+    spot = board.rows[center_idx][center_idx]
+    return spot.to_i if spot.to_i.to_s == spot
     false
   end
-  
+
   def get_best_move(board, mark, depth = 0, best_score = {})
     available_spaces = board.available_spaces
     return available_spaces.first.to_i if available_spaces.length < 2

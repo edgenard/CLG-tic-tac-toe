@@ -1,6 +1,6 @@
 #Board is responsible for the current state of the board.
 class Board
-  attr_reader :state
+  attr_reader :state, :size
   def initialize(size=3)
     @state = build_board(size)
     @size = size
@@ -30,7 +30,7 @@ class Board
     rows = []
     row = []
     state.each_with_index do |val, idx|
-      if row.length == @size
+      if row.length == size
         rows << row
         row = [val]
       elsif idx == state.length - 1
@@ -53,17 +53,17 @@ class Board
 
     left_diagonal = []
     idx = 0
-    @size.times do
+    size.times do
       left_diagonal << state[idx]
-      idx = idx + @size + 1
+      idx = idx + size + 1
     end
     diagonals << left_diagonal
 
     right_diagonal = []
-    idx = @size - 1
-    @size.times do
+    idx = size - 1
+    size.times do
      right_diagonal << state[idx]
-     idx = idx + @size - 1
+     idx = idx + size - 1
     end
     diagonals << right_diagonal
 

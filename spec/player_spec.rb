@@ -45,6 +45,22 @@ RSpec.describe "Player" do
       expect(result).to eq(4)
     end
 
+    it "chooses the center spot of 4x4 board if it is open" do
+      board = Board.new(4)
+
+      result = player.choose_spot(board)
+
+      expect(result).to eq(10)
+    end
+
+    it "chooses the center spot on a 5x5 board if it is open" do
+      board = Board.new(5)
+
+      result = player.choose_spot(board)
+
+      expect(result).to eq(12)
+    end
+
     it "blocks other player from winning" do
       board[0], board[1], board[4] = 'O', 'O', 'X'
 
