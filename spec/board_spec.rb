@@ -1,5 +1,6 @@
 require 'rspec'
 require 'board'
+require 'byebug'
 
 
 RSpec.describe "Board" do
@@ -140,7 +141,6 @@ RSpec.describe "Board" do
 
     it "game is over if the left diagonal is all O" do
       board[0], board[4], board[8] = "O", "O", "O"
-
       result = board.game_over?
 
       expect(result).to be_truthy
@@ -225,7 +225,7 @@ RSpec.describe "Board" do
     end
 
     it "game is over if first row is all X" do
-      board[0], board[1], board[2], board[3] = "X", "X", "X"
+      board[0], board[1], board[2], board[3] = "X", "X", "X", "X"
 
       result = board.game_over?
 
@@ -346,7 +346,6 @@ RSpec.describe "Board" do
 
     it "game is not over if some of first colum is O" do
       board[0], board[4], board[8] = "O", "O", "O"
-
       result = board.game_over?
 
       expect(result).to be_falsy

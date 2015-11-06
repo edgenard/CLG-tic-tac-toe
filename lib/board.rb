@@ -3,6 +3,7 @@ class Board
   attr_reader :state
   def initialize(size=3)
     @state = build_board(size)
+    @size = size
   end
 
   def [](idx)
@@ -34,20 +35,55 @@ class Board
   end
 
   def check_rows?
-    [state[0], state[1], state[2]].uniq.length == 1 ||
-    [state[3], state[4], state[5]].uniq.length == 1 ||
-    [state[6], state[7], state[8]].uniq.length == 1
+    rows.any? { |row| row.uniq.length == 1  }
+  end
+
+  def rows
+    rows = []
+    row = []
+    state.each_with_index do |val, idx|
+      if row.length == @size
+        rows << row
+        row = [val]
+      elsif idx == state.length - 1
+        row << val
+        rows << row
+      else
+        row << val
+      end
+    end
+    rows
+  end
+
+  def columns
+    rows.transpose
   end
 
   def check_columns?
-    [state[0], state[3], state[6]].uniq.length == 1 ||
-    [state[1], state[4], state[7]].uniq.length == 1 ||
-    [state[2], state[5], state[8]].uniq.length == 1
+    columns.any? {|col| col.uniq.length == 1}
   end
 
   def check_diagonals?
-    [state[0], state[4], state[8]].uniq.length == 1 ||
-    [state[2], state[4], state[6]].uniq.length == 1
+    diagonals.any? {|diag| diag.uniq.length == 1}
+  end
+
+  def diagonals
+    diagonals = []
+    left_diagonal = []
+    idx = 0
+    @size.times do
+      left_diagonal << state[idx]
+      idx = idx + @size + 1
+    end
+    diagonals << left_diagonal
+    right_diagonal = []
+    idx = @size - 1
+    @size.times do
+     right_diagonal << state[idx]
+     idx = idx + @size - 1
+    end
+    diagonals << right_diagonal
+    diagonals
   end
 
 end
