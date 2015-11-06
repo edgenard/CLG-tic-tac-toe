@@ -72,6 +72,15 @@ RSpec.describe "Game" do
     expect(game.player2.mark).to eq("X")
   end
 
+  it "allows user to decide the size of the board" do
+    allow(game).to receive(:get_user_choice).and_return("2")
+    allow(game.input_output).to receive(:print).and_return("")
+
+    game.choose_board_size
+
+    expect(game.board.state.length).to eq(16)
+  end
+
   describe "get user choice" do
     it "returns a valid user choice" do
       allow(game.input_output).to receive(:read).and_return("3")
@@ -104,6 +113,7 @@ RSpec.describe "Game" do
 
   it "returns a human players choice" do
     game.player1.human = true
+    allow(game.input_output).to receive(:print).and_return("")
     allow(game).to receive(:get_user_choice).and_return("4")
 
     result = game.get_player_spot(game.player1)

@@ -61,6 +61,16 @@ class Game
     end
   end
 
+  def choose_board_size
+    user_choice = get_user_choice(["1", "2", "3"])
+    case user_choice
+    when "2"
+      @board = Board.new(4)
+    when "3"
+      @board = Board.new(5)
+    end
+  end
+
   def play
     until board.game_over? || board.tie?
       input_output.clear
@@ -88,7 +98,6 @@ class Game
     end
     spot
   end
-
 
   def get_user_choice(valid_choices)
     user_choice = nil
