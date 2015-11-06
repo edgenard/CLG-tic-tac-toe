@@ -39,8 +39,24 @@ class Message
     "Please choose the size of the board you'd like to play on.\n Choose 1 for 3x3 board.\n Choose 2 for 4x4 board.\n Choose 3 for 5x5 board"
   end
 
-  def format_board(board)
-    "|_#{board[0]}_|_#{board[1]}_|_#{board[2]}_|\n|_#{board[3]}_|_#{board[4]}_|_#{board[5]}_|\n|_#{board[6]}_|_#{board[7]}_|_#{board[8]}_|\n"
+  def format_board(rows)
+    rows.map! do |row|
+      row.map do |spot|
+        if spot.length == 2
+          "  " + spot + " |"
+        else
+          "  " + spot + "  |"
+        end
+      end
+    end
+
+    formatted_board = ""
+    rows.each do |row|
+      formatted_board += "|" + row.join
+      formatted_board += "\n"
+    end
+
+    formatted_board
   end
 
   def colorize_markers(message)
@@ -49,7 +65,7 @@ class Message
     message.gsub(/[XO]/, "X" => x_mark, "O" => o_mark )
   end
 
-  def colorize_board(board)
-    colorize_markers(format_board(board))
+  def colorize_board(rows)
+    colorize_markers(format_board(rows))
   end
 end

@@ -58,14 +58,38 @@ RSpec.describe "Message" do
     expect(result).to eq("Please choose the size of the board you'd like to play on.\n Choose 1 for 3x3 board.\n Choose 2 for 4x4 board.\n Choose 3 for 5x5 board")
   end
 
+  describe "formatting boards" do
+    it "formats a 3x3 board" do
+      rows = [["0", "1", "2"], ["3", "4", "5"], ["6", "7", "8"]]
+      formatted_board =
+      "|  0  |  1  |  2  |\n|  3  |  4  |  5  |\n|  6  |  7  |  8  |\n"
 
-  it "has a format board message" do
-    board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    formatted_board = "|_0_|_1_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n"
 
-    result = message.format_board(board)
+      result = message.format_board(rows)
 
-    expect(result).to eq(formatted_board)
+      expect(result).to eq(formatted_board)
+    end
+
+    it "formats a 4x4 board" do
+      rows = [["0", "1", "2", "3"],
+               ["4", "5", "6", "7"],
+               ["8", "9", "10", "11"],
+              ["12", "13", "14", "15"]
+            ]
+
+      formatted_board ="|  0  |  1  |  2  |  3  |\n|  4  |  5  |  6  |  7  |\n|  8  |  9  |  10 |  11 |\n|  12 |  13 |  14 |  15 |\n"
+
+
+      result = message.format_board(rows)
+
+      expect(result).to eq(formatted_board)
+    end
+
+    it "formates a 5x5 board" do
+      rows = [["0","1","2", "3", "4"], ["5", "6", "7", "8", "9"], ["10", "11", "12", "13", "14"], ["15", "16", "17", "18",  "19"], ["20", "21","22", "23", "24"]]
+
+      formatted_board ="|  0  |  1  |  2  |  3  |  4  |\n|  5  |  6  |  7  |  8  |  9  |\n|  10 |  11 |  12 |  13 |  14 |\n|  15 |  16 |  17 |  18 |  19 |\n|  20 |  21 |  22 |  23 |  24 |\n"
+    end
   end
 
   it "colors X green, O red" do
@@ -80,12 +104,12 @@ RSpec.describe "Message" do
   end
 
   it "returns a colorized board" do
-    board = ["X", "O", "2", "3", "4", "5", "6", "7", "8"]
+  rows = [["0","1","X", "O", "4"], ["5", "6", "7", "8", "9"], ["10", "11", "12", "13", "X"], ["O", "16", "17", "18",  "19"], ["20", "21","22", "23", "24"]]
     x_mark = "X".colorize(:green)
     o_mark = "O".colorize(:red)
-    colorized_board = "|_#{x_mark}_|_#{o_mark}_|_2_|\n|_3_|_4_|_5_|\n|_6_|_7_|_8_|\n"
+    colorized_board ="|  0  |  1  |  #{x_mark}  |  #{o_mark}  |  4  |\n|  5  |  6  |  7  |  8  |  9  |\n|  10 |  11 |  12 |  13 |  #{x_mark}  |\n|  #{o_mark}  |  16 |  17 |  18 |  19 |\n|  20 |  21 |  22 |  23 |  24 |\n"
 
-    result = message.colorize_board(board)
+    result = message.colorize_board(rows)
 
     expect(result).to eq(colorized_board)
   end
