@@ -2,8 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     byebug (6.0.2)
+    coderay (1.1.0)
     colorize (0.7.7)
     diff-lcs (1.2.5)
+    method_source (0.8.2)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -17,6 +23,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    slop (3.6.0)
 
 PLATFORMS
   ruby
@@ -24,6 +31,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   colorize
+  pry
   rspec
 
 BUNDLED WITH
