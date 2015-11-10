@@ -70,6 +70,14 @@ class Board
     diagonals
   end
 
+  def dup
+    new_board = Board.new(size)
+    new_board.state.each_index do |index|
+      new_board[index] = self[index]
+    end
+    new_board
+  end
+
   private
 
   def build_board(size)

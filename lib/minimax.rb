@@ -12,39 +12,6 @@ class Board
   end
 end
 
-def get_best_move(board, mark, depth = 0, best_score = {}, scoring = 1, minimax = true)
-  message = Message.new
-  available_spaces = board.available_spaces
-
-  best_score = {}
-  #Populate Hash with available moves
-  available_spaces.each do  |space|
-    dup_board = board.dup
-    dup_board[space.to_i] = mark
-    puts "Mark is #{mark}"
-    puts "Space is #{space}"
-    puts "Scoring is #{scoring}"
-    puts message.colorize_board(dup_board.rows)
-    if dup_board.game_over?
-      best_score[space.to_i] ? best_score[space.to_i] += scoring : best_score[space.to_i] = scoring
-      break
-    elsif dup_board.tie?
-      best_score[space.to_i] ? best_score[space.to_i] += 0 : best_score[space.to_i] = 0
-      break
-    else
-      puts "recursing"
-      puts "Before switch scoring is #{scoring}"
-      scoring = switch_scoring(scoring)
-      puts "After switch scoring is #{scoring}"
-      minimax ? minimax = false : minimax = true
-      best_score[space.to_i] = get_best_move(dup_board, other_players_mark(mark), depth=0, best_score, scoring, minimax)
-    end
-  end
-  p "before getting max or min #{best_score}"
-  return best_score.max_by{|k, v| v}[1] if minimax
-  return best_score.min_by {|k, v| v}[1]
-end
-
 def other_best_move(board, mark, scoring = 1, best_score = {})
   if board.game_over?
     return scoring
@@ -62,9 +29,18 @@ def other_best_move(board, mark, scoring = 1, best_score = {})
         best_score[space.to_i] = scoring
       end
     elsif dup_board.tie?
-      best_score[space.to_i] = 0
+      #best_score[space.to_i] = 0
+      if best_score[space.to_i]
+        best_score[space.to_i] += 0
+      else
+        best_score[space.to_i] = 0
+      end
     else
-      best_score[space.to_i] = get_score(dup_board, mark, scoring, best_score)
+      if best_score[space.to_i]
+        best_score[space.to_i] += get_score(dup_board, mark, scoring, best_score)
+      else
+        best_score[space.to_i] = get_score(dup_board, mark, scoring, best_score)
+      end
     end
   end
   best_score
