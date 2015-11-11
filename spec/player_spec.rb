@@ -1,5 +1,6 @@
 require 'rspec'
 require 'player'
+require 'board'
 
 RSpec.describe "Player" do
   let(:player) { Player.new(mark: "X") }
