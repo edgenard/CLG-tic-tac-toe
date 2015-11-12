@@ -1,5 +1,6 @@
 require_relative "board"
 require_relative "player"
+require 'byebug'
 
 
 class TTT_Tree
@@ -28,13 +29,16 @@ class TTT_Tree
   def best_move
     if board.game_over?
       return true
+    elsif board.tie?
+      return true
     end
     queue = children
-    winner = nil
     move = nil
-    queue.each do |child|
+    move_hash = {}
+    until queue.empty?
+      child = queue.shift
       if child.best_move
-        winner = child.other_players_mark
+        
         move = child.previous_move
         break
       else
