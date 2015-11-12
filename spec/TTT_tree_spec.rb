@@ -12,16 +12,25 @@ RSpec.describe "TTT_tree" do
       expect(result.length).to eq(9)
     end
 
-    it "returns an immediate winning" do
-      board[0], board[2], board[3], board[4] = "O", "O", "X", "X"
+    it "returns the immediate winning_move for player X" do
+      board[0], board[4], board[7], board[5] = "X", "X", "O", "O"
       tree = TTT_Tree.new(board, "X")
 
-      result = tree.best_move
+      result = tree.winning_move("X")
 
-      expect(result).to eq("5")
+      expect(result).to eq("8")
     end
 
-    it "returns a winning move several moves away" do
+    it "returns the immediate winning_move for player O" do
+      board[0], board[4], board[2], board[5] = "X", "X", "O", "O"
+      tree = TTT_Tree.new(board, "O")
+
+      result = tree.winning_move("O")
+
+      expect(result).to eq("8")
+    end
+
+    xit "returns a winning move several moves away" do
       board[0], board[4], board[5] = "O","X", "O"
       tree = TTT_Tree.new(board, "X")
 
