@@ -5,20 +5,22 @@ require 'byebug'
 
 
 class TTT_Tree
-  attr_reader :board, :mark, :previous_move
+  attr_reader :board, :mark, :previous_move, :depth
 
-  def initialize(board, mark, previous_move = nil)
+  def initialize(board, mark, previous_move = nil, depth = 0)
     @board = board
     @mark = mark
     @previous_move = previous_move
+    @depth = depth
   end
 
   def children
     available_spaces = board.available_spaces
+    @depth = @depth + 1
     children = available_spaces.map do |space|
       dup_board = board.dup
       dup_board[space.to_i] = mark
-      TTT_Tree.new(dup_board, other_players_mark, space)
+      TTT_Tree.new(dup_board, other_players_mark, space, @depth)
     end
     children
   end
@@ -28,37 +30,34 @@ class TTT_Tree
   end
 
   def best_move
-    if board.game_over?
-      return true
-    elsif board.tie?
-      return true
+    winning_moves =children.select {|child| child.winning_move?(mark)}
+    if !winning_moves.empty?
+      return winning_moves.reduce { |closest,move| closest.depth > move.depth ? move : closest }.previous_move
     end
-    queue = children
-    move = nil
-    move_hash = {}
-
-    winning_moves = children.any? { |child| child.winning_move?(mark)  }
-    until queue.empty?
-      child = queue.shift
-      if child.best_move
-
-        move = child.previous_move
-        break
-      else
-        queue = queue + child.children
-      end
-    end
-    move
+    non_losing_moves = children.select{|child| !child.losing_move?(mark)}
+    return non_losing_moves.reduce{|closest, move| closest.depth > move.depth ? move : closest}.previous_move
   end
 
-  def winning_move(playing)
-    message = Message.new
+  def winning_move?(playing)
     if board.game_over? && other_players_mark == playing
-      return previous_move
+      return true
+    elsif mark == playing
+      children.any? {|child| child.winning_move?(playing)}
     else
-      children.each do |child|
-        return child.winning_move(playing)
-      end
+      children.all? {|child| child.winning_move?(playing)}
+    end
+  end
+
+  def losing_move?(playing)
+    if board.tie?
+      return false
+    end
+    if board.game_over? && other_players_mark != playing
+      return true
+    elsif mark == playing
+      return children.all? {|child| child.losing_move?(playing)}
+    else
+      return children.any? { |child| child.losing_move?(playing)}
     end
   end
 
