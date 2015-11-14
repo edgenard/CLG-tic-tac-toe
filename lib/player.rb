@@ -1,4 +1,5 @@
 #Player is responsible for players attributes and actions
+require_relative "TTT_tree"
 class Player
   attr_accessor :mark, :human
   def initialize(mark:, human: false)
@@ -8,7 +9,8 @@ class Player
 
 
   def choose_spot(board)
-    center_spot(board) || other_best_move(board, mark).max_by {|k, v| v}[0]
+    TTT_Tree.new(board, mark).best_move.to_i
+    # center_spot(board) || other_best_move(board, mark).max_by {|k, v| v}[0]
   end
 
 

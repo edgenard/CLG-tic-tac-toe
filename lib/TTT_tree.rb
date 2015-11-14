@@ -39,8 +39,8 @@ class TTT_Tree
   end
 
   def winning_move?(playing)
-    if board.game_over? && other_players_mark == playing
-      return true
+    if board.game_over?
+      return other_players_mark == playing
     elsif mark == playing
       children.any? {|child| child.winning_move?(playing)}
     else
@@ -52,8 +52,8 @@ class TTT_Tree
     if board.tie?
       return false
     end
-    if board.game_over? && other_players_mark != playing
-      return true
+    if board.game_over?
+      return other_players_mark != playing
     elsif mark == playing
       return children.all? {|child| child.losing_move?(playing)}
     else
