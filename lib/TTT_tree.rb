@@ -39,6 +39,9 @@ class TTT_Tree
   end
 
   def winning_move?(playing)
+    if board.tie?
+      return false
+    end
     if board.game_over?
       return other_players_mark == playing
     elsif mark == playing

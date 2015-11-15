@@ -9,8 +9,7 @@ class Player
 
 
   def choose_spot(board)
-    TTT_Tree.new(board, mark).best_move.to_i
-    # center_spot(board) || other_best_move(board, mark).max_by {|k, v| v}[0]
+    center_spot(board) || TTT_Tree.new(board, mark).best_move
   end
 
 

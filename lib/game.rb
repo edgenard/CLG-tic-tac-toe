@@ -96,7 +96,7 @@ class Game
       input_output.print(message.select_spot)
       spot = get_user_choice(board.available_spaces).to_i
     else
-      spot = player.choose_spot(board)
+      spot = player.choose_spot(board).to_i
     end
     spot
   end

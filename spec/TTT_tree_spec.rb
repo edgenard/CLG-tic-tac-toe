@@ -45,6 +45,18 @@ RSpec.describe "TTT_tree" do
       expect(winning_moves).to include(result)
     end
 
+    it "returns a winning move several moves away" do
+      board[0], board[1]           = "O", "X"
+                board[4]           =      "O"
+                          board[8] =         "X"
+      winning_moves = ["3", "6"]
+      tree = TTT_Tree.new(board, "O")
+
+      result = tree.best_move
+
+      expect(winning_moves).to include(result)
+    end
+
     it "returns an immediate blocking move for X" do
       board[0], board[1], board[2] = "X", "O", "X"
       board[3], board[4], board[5] = "O", "O", "X"
