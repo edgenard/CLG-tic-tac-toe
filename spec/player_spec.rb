@@ -43,7 +43,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(4)
+      expect(result).to eq("4")
     end
 
     it "chooses the center spot of 4x4 board if open" do
@@ -51,7 +51,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(10)
+      expect(result).to eq("10")
     end
 
     it "chooses the center spot on a 5x5 board if open" do
@@ -59,7 +59,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(12)
+      expect(result).to eq("12")
     end
 
     it "blocks other player from winning on 3x3 board" do
@@ -68,7 +68,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(2)
+      expect(result).to eq("2")
     end
 
     it "blocks other player from winning on 4x4 board" do
@@ -78,7 +78,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(3)
+      expect(result).to eq("3")
     end
 
     it "blocks other player from winning on 5x5 board" do
@@ -88,7 +88,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(21)
+      expect(result).to eq("21")
     end
 
     it "wins when it can on 3x3 board" do
@@ -98,7 +98,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(7)
+      expect(result).to eq("7")
     end
 
     it "wins when it can on 4x4 board" do
@@ -108,7 +108,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(15)
+      expect(result).to eq("15")
     end
 
     it "wins when it can on 5x5 board" do
@@ -118,7 +118,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(14)
+      expect(result).to eq("14")
     end
 
     it "immediately choooses the only empty spot left on 3x3 board" do
@@ -130,7 +130,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(8)
+      expect(result).to eq("8")
       expect(player).not_to have_received(:possible_move)
     end
     it "immediately choooses the only empty spot left on 4x4 board" do
@@ -143,7 +143,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(15)
+      expect(result).to eq("15")
       expect(player).not_to have_received(:possible_move)
     end
 
@@ -158,7 +158,7 @@ RSpec.describe "Player" do
 
       result = player.choose_spot(board)
 
-      expect(result).to eq(24)
+      expect(result).to eq("24")
       expect(player).not_to have_received(:possible_move)
     end
   end
